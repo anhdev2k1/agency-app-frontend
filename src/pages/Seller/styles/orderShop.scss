@@ -1,0 +1,105 @@
+.list__transaction{
+    width: 100%;
+    min-height: 300px;
+    padding: 10px;
+    .order__search{
+        height: 50px;
+        display: flex;
+        gap: 10px;
+        border: 1px solid #E5E5E5;
+        .search__btn{
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #1677FF;
+            color: white;
+        }
+        .input__search{
+            width: 60%;
+            border: none;
+            outline: none;
+            text-indent: 15px;
+            font-size: 1.6rem;
+        }
+    }
+    .order__content{
+        margin-top: 30px;
+        &-heading{
+            display: flex;
+            height: 60px;
+            align-items: center;
+            justify-content: space-between;
+            .order__heading-item{
+                font-size: 1.6rem;
+            }
+        }
+        .order__item-product{
+            width: 30%;
+        }
+        .order__item-amount{
+            width: 10%;
+        }
+        .order__item-status{
+            width: 15%;
+        }
+        .order__item-paidAt{
+            width: 10%;
+        }
+        .order__item-shipping{
+            width: 10%;
+        }
+        .order__item-btn{
+            width: 10%;
+        }
+        .list__order{
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            .list__order-item{
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                .order__navbar-heading{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    height: 50px;
+                    background-color: #F9F9F9;
+                    
+                }
+                .list__order-product{
+                    margin-top: 8px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    .order__item-product{
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        img{
+                            width: 100px;
+                            height: 100px;
+                        }
+                        .item__product-title{
+                            display: flex;
+                            flex-direction: column;
+                            padding: 0 10px;
+                            .product__title-name{
+                                font-size: 1.4rem;
+                            }
+                        }
+                        
+                    }
+                    .item__product-status span, .item__product-paidAt span{
+                        padding: 8px 10px;
+                        border-radius: 8px;
+                    }
+                    
+                }
+            }
+        }
+    }
+}

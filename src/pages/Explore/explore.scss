@@ -1,0 +1,90 @@
+.explore{
+    width: 100%;
+    min-height: 300px;
+    margin-top: 80px;
+    .slick-slide{
+        padding: 0 10px;
+        margin-right: 0 10px;
+    }
+    .explore__bg{
+        position: relative;
+        height: 400px;
+        overflow-y: hidden;
+        video{
+            width: 100%;
+            position: absolute;
+            top: -230px;
+            left: 0;
+        }
+    }
+    .explore__category{
+        margin-top: 30px;
+        max-width: 450px;
+        min-height: 200px;
+        padding: 15px;
+        bottom: -100px;
+        left: 200px;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+        &-title{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            h3{
+                font-size: 1.4rem;
+                color: #333;
+            }
+            span{
+                font-size: 1.4rem;
+                color: #1677FF;
+                font-weight: bold;
+                cursor: pointer;
+            }
+        }
+        .category-slides-item{
+            display: flex !important;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            img{
+                width: 80px;
+            }
+            p{
+                margin-top: 15px;
+                font-size: 1.4rem;
+            }
+        }
+        
+    }
+    .product__special{
+        width: 100%;
+        margin-top: 30px;
+        background-color: white;
+        min-height: max-content;
+        padding: 15px;
+        &-title{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            h3{
+                font-size: 1.4rem;
+                color: #333;
+            }
+            span{
+                font-size: 1.4rem;
+                color: #1677FF;
+                font-weight: bold;
+                cursor: pointer;
+            }
+        }
+        
+    }
+}
+// .slick-track{
+//     height: 450px !important;
+//     overflow-y: hidden !important;
+// }

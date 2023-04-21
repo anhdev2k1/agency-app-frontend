@@ -1,0 +1,32 @@
+.user__container{
+    padding: 10px;
+    .user__address{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 30px;
+        padding: 10px 0;
+        box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+        padding: 15px 0;
+        &-info{
+            width: 300px;
+            .address__info-name{
+                font-size: 1.6rem;
+            }
+            .address__info{
+                font-size: 1.4rem;
+            }
+        }
+        
+    }
+    .address__btn-update{
+        padding: 8px;
+        font-size: 1.4rem;
+        cursor: pointer;
+        color: #1677FF;
+        font-weight: 600;
+        
+    }
+}
+
+    

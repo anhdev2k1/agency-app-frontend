@@ -1,0 +1,77 @@
+.ant-timeline .ant-timeline-item-head{
+    background: none !important;
+}
+.detail__order{
+    display: flex;
+    min-height: 300px;
+    gap: 15px;
+    margin-top: 100px;
+    &-info{
+        width: 80%;
+        background-color: #F6F6F6;
+        border-radius: 8px;
+        padding: 10px;
+        .order__info-item{
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            background-color: white;
+            min-height: 70px;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 1.3rem;
+            color: #333;
+            align-items: flex-start;
+        }
+        .order__info-bill-title{
+            width: 100%;
+        }
+        .order__bill-table-heading, .order__bill-table-product{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        .order__bill-table-heading{
+            display: flex;
+        }
+        .order__bill-table-index{
+            width: 5%;
+        }
+        .order__bill-table-yield{
+            width: 35%;
+        }
+        .order__bill-table-price{
+            width: 15%;
+        }
+        .order__bill-table-quantity{
+            width: 15%;
+        }
+        .order__bill-table-amount{
+            width: 15%;
+        }
+        .order__bill-product-total{
+            margin-left: auto;
+            margin-right: 0;
+            width: max-content;
+            .bill__product-total-item{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 30px;
+                margin-bottom: 10px;
+            }
+        }
+    }
+    .timeline__history{
+        flex: 1;
+        background-color: white;
+        padding: 10px;
+        border-radius: 8px;
+        max-height: 400px;
+        .timeline{
+            span{
+                font-size: 1.6rem;
+            }
+        }
+    }
+}

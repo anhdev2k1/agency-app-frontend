@@ -1,0 +1,56 @@
+body{
+    background: linear-gradient(90deg, hsla(298, 68%, 90%, 1) 0%, hsla(30, 82%, 91%, 1) 100%);
+}
+.form__container{
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+    padding: 20px 40px;
+    border-radius: 5px;
+    position: relative;
+    .form__container-title{
+        text-align: center;
+        font-size: 2.5rem;
+    }
+    .circle{
+        position: absolute;
+        border-radius: 50%;
+        background: linear-gradient(90deg, hsla(176, 61%, 87%, 1) 0%, hsla(150, 54%, 86%, 1) 50%, hsla(301, 68%, 84%, 1) 100%);
+        filter: blur(10px);
+        z-index: -1;
+    }
+    .circle__one{
+        width: 400px;
+        height: 400px;
+        top: -100px;
+        left: -200px;
+    }
+    .circle__two{
+        width: 200px;
+        height: 200px;
+        top: 50%;
+        right: -300px;
+    }
+    .form{
+        padding: 15px;
+        margin: 0 auto;
+        .form__btn{
+            width: 180px;
+              height: 50px;
+              background:
+                linear-gradient(90deg, hsla(176, 61%, 87%, 1) 0%, hsla(150, 54%, 86%, 1) 50%, hsla(301, 68%, 84%, 1) 100%);
+              color: black;
+              font-weight: 600;
+              text-transform: uppercase;
+              border-radius: 50px;
+              display: block;
+              margin: 0 auto;
+              box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+        }
+        .title__login{
+            padding: 20px 0;
+            text-align: center;
+        }
+    }
+}

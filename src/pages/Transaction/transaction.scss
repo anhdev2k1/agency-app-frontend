@@ -1,0 +1,72 @@
+.transaction__container{
+    margin-top: 100px;
+    display: flex;
+    gap: 15px;
+    .transaction__info{
+        width: 800px;
+        max-width: 800px;
+        min-height: 300px;
+        background-color: white;
+        border-radius: 8px;
+        padding: 15px;
+        .transaction__input-flex{
+            display: flex;
+            gap: 15px;
+            .input__flex-item{
+                width: calc(100% / 2);
+                
+            }
+            
+        }
+    }
+    .transaction__order{
+        flex: 1;
+        min-height: 300px;
+        background-color: white;
+        border-radius: 8px;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .transaction__order-list{
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            .order__list-item{
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                .order__item-img{
+                    width: 70px;
+                    height: 70px;
+                    border-radius: 8px;
+                    
+                }
+                .order__item-title{
+                    line-height: 22.5px;
+                }
+            }
+        }
+        .transaction__order-total{
+           display: flex;
+           flex-direction: column;
+           gap: 15px;
+           .order__total-flex{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1.4rem;
+           }
+           .order__btn{
+            height: 45px;
+            outline: none;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.4rem;
+            color: white;
+            cursor: pointer;
+            background-color: #1677FF;
+           }
+        }
+    }
+}

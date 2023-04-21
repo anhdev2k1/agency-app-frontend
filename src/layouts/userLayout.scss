@@ -1,0 +1,9 @@
+.user__flex{
+    display: flex;
+    margin-top: 100px;
+    gap: 20px;
+    .user__content{
+        flex: 1;
+        background-color: white;
+    }
+}

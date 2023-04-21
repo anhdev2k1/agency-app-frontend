@@ -1,0 +1,76 @@
+.product__item{
+    width: 250px;
+    height: max-content;
+    cursor: pointer;
+    border: 1px solid #333;
+    padding: 5px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .product__item-img{
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+    }
+    .product__item-title{
+       
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        
+        .product__item-shop{
+            font-size: 1.4rem;
+            padding: 10px 0;
+            display: block;
+            width: max-content;
+            color: #1677FF;
+        }
+        .product__item-name{
+            font-size: 1.4rem;
+            line-height: 22.5px;
+            // padding: 10px 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+           
+        }
+        .product__item-number{
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.4rem;
+            padding-top: 15px;
+        }
+    }
+    .product__hover{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 150px;
+        background: linear-gradient(90deg, hsla(176, 61%, 87%, 1) 0%, hsla(150, 54%, 86%, 1) 50%, hsla(301, 68%, 84%, 1) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: translateY(200%);
+        transition: transform ease-in-out .3s;
+        &-btn{
+            font-size: 3rem;
+            width: 50px;
+            height: 50px;
+            background-color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+        }
+
+        
+    }
+    &:hover .product__hover{
+        transform: translateY(0);
+        transition: transform ease-in-out .3s;
+    }
+    
+}
