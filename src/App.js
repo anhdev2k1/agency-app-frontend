@@ -9,6 +9,7 @@ import { checkUser } from "./redux/features/userSlice";
 import UserLayout from "./layouts/UserLayout";
 import { addToCart } from "./redux/features/CartSlice";
 import SellerLayout from "./layouts/SellerLayout";
+import AdminLayout from "./layouts/AdminLayout"
 function App() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
@@ -53,7 +54,7 @@ function App() {
                 ? UserLayout
                 : route.layout === "seller"
                 ? SellerLayout
-                : DefaultLayout;
+                : route.layout === "admin" ? AdminLayout : DefaultLayout;
             const Page = route.component;
             return (
               <Route

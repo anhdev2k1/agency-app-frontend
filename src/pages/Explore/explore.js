@@ -3,17 +3,11 @@ import "./explore.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import cateSlide1 from "../../assets/images/explore-cate1.png";
-import cateSlide2 from "../../assets/images/explore-cate2.png";
-import cateSlide3 from "../../assets/images/explore-cate3.png";
-import cateSlide4 from "../../assets/images/explore-cate4.png";
-import cateSlide5 from "../../assets/images/explore-cate5.png";
-import cateSlide6 from "../../assets/images/explore-cate6.png";
-import cateSlide7 from "../../assets/images/explore-cate7.png";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Product from "../../components/Product/product";
 import { Spin } from "antd";
+import { Link } from "react-router-dom";
 const Explore = () => {
   const settings = {
     infinite: true,
@@ -22,6 +16,7 @@ const Explore = () => {
     slidesToScroll: 1,
   };
   const [productSpecial, setProductSpecial] = useState([]);
+  const [categories, setCategories] = useState([])
   const [isLoading, setIsLoading] = useState(true);
   const getProductSpecial = async () => {
     setIsLoading(true);
@@ -33,8 +28,16 @@ const Explore = () => {
     setIsLoading(false);
   };
   useEffect(() => {
+    getCategories()
     getProductSpecial();
   }, []);
+  const getCategories = async () => {
+    const res = await axios({
+      method: "GET",
+      url: "http://localhost:5000/api/category",
+    });
+    setCategories(res.data.data);
+  }
   return (
     <div className="explore">
       <div className="explore__bg">
@@ -53,34 +56,15 @@ const Explore = () => {
               <Spin />
             ) : (
               <Slider {...settings} className="slides">
-                <div className="category-slides-item">
-                  <img src={cateSlide1} alt="" />
-                  <p className="category__slide-name">Quần áo</p>
-                </div>
-                <div className="category-slides-item">
-                  <img src={cateSlide2} alt="" />
-                  <p className="category__slide-name">Sắc đẹp</p>
-                </div>
-                <div className="category-slides-item">
-                  <img src={cateSlide3} alt="" />
-                  <p className="category__slide-name">Giày dép</p>
-                </div>
-                <div className="category-slides-item">
-                  <img src={cateSlide4} alt="" />
-                  <p className="category__slide-name">Sức khỏe</p>
-                </div>
-                <div className="category-slides-item">
-                  <img src={cateSlide5} alt="" />
-                  <p className="category__slide-name">Đồng hồ</p>
-                </div>
-                <div className="category-slides-item">
-                  <img src={cateSlide6} alt="" />
-                  <p className="category__slide-name">Túi xách</p>
-                </div>
-                <div className="category-slides-item">
-                  <img src={cateSlide7} alt="" />
-                  <p className="category__slide-name">Phụ kiện</p>
-                </div>
+                {categories.map((cate,index) => {
+                  return (
+                    <Link to={`/category/search?q=${cate.slug}`} className="category-slides-item" key={index}>
+                    <img src={cate.url?.url[0]} alt="" />
+                    <p className="category__slide-name">{cate.name}</p>
+                  </Link>
+                  )
+                })}
+                
               </Slider>
             )}
           </div>

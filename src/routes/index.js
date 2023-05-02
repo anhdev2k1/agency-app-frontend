@@ -19,6 +19,10 @@ import CreateShop from "../pages/Seller/createShop";
 import OrderShop from "../pages/Seller/OrderShop";
 import DetailOrder from "../pages/Seller/detailOrder";
 import ManageProduct from "../pages/Seller/manageProduct";
+import ManageAdmin from "../pages/Admin/manageAdmin";
+import AddCategory from "../pages/Admin/AddCategory"
+import AllAccount from "../pages/Admin/allAccount";
+import SearchPage from "../pages/SearchPage";
 const publicRoutes = [
   {
     path: "/",
@@ -28,6 +32,10 @@ const publicRoutes = [
   {
     path: "/explore",
     component: Explore,
+  },
+  {
+    path: "/category/search",
+    component: SearchPage,
   },
   {
     path: "/cart",
@@ -121,6 +129,48 @@ const publicRoutes = [
     path: "/shop/product",
     component: ManageProduct,
     layout: "seller",
+  },
+
+  /*-------Admin ROUTE-------- */
+  {
+    path: "/admin",
+    component: ManageAdmin,
+    layout: "admin",
+  },
+  {
+    path: "/admin/category",
+    component: AddCategory,
+    layout: "admin",
+  },
+  {
+    path: "/admin/accounts",
+    component: AllAccount,
+    layout: "admin",
+  },
+  {
+    path: "/admin/accountSeller",
+    component: AddCategory,
+    layout: "admin",
+  },
+  {
+    path: "/admin/accountUser",
+    component: AddCategory,
+    layout: "admin",
+  },
+  {
+    path: "/admin/productInfringe",
+    component: AddCategory,
+    layout: "admin",
+  },
+  {
+    path: "/admin/statAccount",
+    component: AddCategory,
+    layout: "admin",
+  },
+  {
+    path: "/admin/statSeller",
+    component: AddCategory,
+    layout: "admin",
   },
 ];
 export { publicRoutes };

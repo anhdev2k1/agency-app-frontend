@@ -81,7 +81,7 @@ const Cart = () => {
                       ></Checkbox>
                       <div className="cart__item-info">
                         <img
-                          src={item.image.url[0]}
+                          src={item.image?.url[0]}
                           alt=""
                           className="item__info-img"
                         />
@@ -141,7 +141,7 @@ const Cart = () => {
               </Link>
             </div>
           ) : (
-            <Spin />
+            <p>Chưa có sản phẩm nào trong giỏ hàng</p>
           )}
         </div>
       </div>

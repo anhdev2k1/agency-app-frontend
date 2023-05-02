@@ -15,6 +15,8 @@ import {
   decrementQuantity,
   incrementQuantity,
 } from "../../redux/features/CartSlice";
+import { Image } from 'antd';
+import avt from "../../assets/images/avt-user.png";
 const DetailProduct = () => {
   const { id } = useParams();
   const user = useSelector((state) => state.user.user);
@@ -23,12 +25,10 @@ const DetailProduct = () => {
     state.cart.cart.find((item) => item._id === id)
   );
   const onChange = (key) => {
-    console.log(key);
   };
   const [quantityProduct, setQuantityProduct] = useState(1);
 
   const setTab = (data) => {
-    console.log(data);
     const items = [
       {
         key: "1",
@@ -44,7 +44,7 @@ const DetailProduct = () => {
             <div className="tab__info-shop">
               <span>Thông tin cửa hàng: </span>
               <div className="info__shop-wrapper">
-                <img src={data.shop.user.url?.url[0]} alt="" />
+                <img src={Object.keys(data.shop?.user).length > 0 ? data.shop.user?.url?.url[0] : avt } alt="" />
                 <div className="info__shop-title">
                   <h3>{data.shop.name}</h3>
                   <div className="info__shop-btn">
@@ -130,7 +130,7 @@ const DetailProduct = () => {
           ) : (
             <div className="detail__container">
               <div className="detail__container-img">
-                <img src={dataProduct.image.url[0]} alt="" />
+                <Image src={dataProduct.image.url[0]} alt="" />
               </div>
               <div className="detail__container-info">
                 <h3 className="detail__info-shop">{dataProduct.shop.name}</h3>

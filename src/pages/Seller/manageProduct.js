@@ -1,6 +1,7 @@
-import { Space, Table, Tag } from 'antd';
+import { Button, Space, Table, Tag } from 'antd';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import "./styles/manageProduct.scss"
 const ManageProduct = () => {
     const idShop = JSON.parse(localStorage.getItem("page")) || ""
     const [products, setProducts] = useState([])
@@ -55,7 +56,9 @@ const ManageProduct = () => {
           render: (_, record) => (
             <Space size="middle">
               
-              <a>Xoá</a>
+              <Button type="primary">
+                Xoá
+              </Button>
             </Space>
           ),
         },
@@ -65,7 +68,9 @@ const ManageProduct = () => {
         
         <>
         <h1>Quản lý sản phẩm</h1>
+        <div class="manage__product">
         <Table columns={columns} dataSource={products}  />
+        </div>
         </>
         
      );

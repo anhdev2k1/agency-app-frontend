@@ -5,7 +5,7 @@ import { addToCart } from "../../redux/features/CartSlice";
 import axios from "axios";
 import { Link } from "react-router-dom";
 const Product = (props) => {
-  const { index, product } = props;
+  const { index, product, width } = props;
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const fetchAddToCart = async (data) => {
@@ -28,9 +28,8 @@ const Product = (props) => {
   };
   return (
     <>
-      <Link to={`/product/${product._id}`}>
-        <div className="product__item" key={index}>
-          
+      <Link to={`/product/${product._id}`} >
+        <div className="product__item" key={index} >
           <img
             src={product.image.url[0]}
             alt=""
