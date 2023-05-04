@@ -135,8 +135,8 @@ const DetailProduct = () => {
               <div className="detail__container-info">
                 <h3 className="detail__info-shop">{dataProduct.shop.name}</h3>
                 <h2 className="detail__info-name">{dataProduct.name}</h2>
-                <span className="detail__info-view">29 lượt xem</span>
-                <div className="detail__info-size">
+                {/* <span className="detail__info-view">29 lượt xem</span> */}
+                {/* <div className="detail__info-size">
                   <p className="info__size-heading">Chọn kích cỡ: </p>
                   <div className="info__size-list">
                     <div className="info__size-item">
@@ -152,7 +152,7 @@ const DetailProduct = () => {
                       <span>XL</span>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <Tabs
                   defaultActiveKey="1"
                   items={setTab(dataProduct)}

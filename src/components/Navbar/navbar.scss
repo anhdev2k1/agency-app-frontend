@@ -32,17 +32,31 @@
         .navbar__search{
             display: flex;
             align-items: center;
-            .search__category{
-                width: 130px;
-            }
-            
-            .search__input{
+            height: 40px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #333;
+            &-input{
                 width: 500px;
-                margin-left:5px;
+                height: 100%;
+                border: none;
+                outline: none;
+                border-radius: 8px;
+                text-indent: 10px;
                 ::placeholder{
-                    font-size: 1.4rem;
+                    font-size: 1.6rem;
                 }
                 
+            }
+            &-btn{
+                width: 40px;
+                height: 100%;
+                text-align: center;
+                line-height: 40px;
+                font-size: 1.7rem;
+                background-color: #6c6c6c74;
+                cursor: pointer;
+                color: #333;
             }
         }
         .navbar__ultis{

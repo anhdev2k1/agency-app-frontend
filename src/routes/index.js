@@ -34,7 +34,7 @@ const publicRoutes = [
     component: Explore,
   },
   {
-    path: "/category/search",
+    path: "/:path/search",
     component: SearchPage,
   },
   {
