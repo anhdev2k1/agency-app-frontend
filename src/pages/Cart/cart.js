@@ -3,7 +3,7 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { Spin, Button, message, Checkbox } from "antd";
 import "./cart.scss";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   decrementQuantity,
   incrementQuantity,
@@ -63,6 +63,18 @@ const Cart = () => {
   const handleOrder = () => {
     localStorage.setItem("order", JSON.stringify(checked));
   };
+  const navigate = useNavigate()
+  const handleDirectPurchase = (e) => {
+    e.preventDefault()
+    if(checked.length > 0) {
+      messageApi.loading("Đợi tý nhé...!");
+      setTimeout(() => {
+        navigate("/transaction")
+      },1000)
+    }else{
+      messageApi.error("Hãy chọn ít nhất 1 sản phẩm trước khi qua trang THANH TOÁN");
+    }
+  }
   return (
     <div className="cart">
       {contextHolder}
@@ -81,7 +93,7 @@ const Cart = () => {
                       ></Checkbox>
                       <div className="cart__item-info">
                         <img
-                          src={item.image.url[0]}
+                          src={item.image?.url[0]}
                           alt=""
                           className="item__info-img"
                         />
@@ -136,12 +148,13 @@ const Cart = () => {
                 to="/transaction"
                 className="cart__btn-confirm"
                 onClick={handleOrder}
+                
               >
-                <button>Mua hàng</button>
+                <button onClick={handleDirectPurchase}>Mua hàng</button>
               </Link>
             </div>
           ) : (
-            <Spin />
+            <p>Chưa có sản phẩm nào trong giỏ hàng</p>
           )}
         </div>
       </div>

@@ -4,10 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/features/CartSlice";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { message } from "antd";
 const Product = (props) => {
   const { index, product } = props;
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
+  const [messageApi, contextHolder] = message.useMessage();
   const fetchAddToCart = async (data) => {
     await axios({
       method: "POST",
@@ -25,12 +27,13 @@ const Product = (props) => {
     };
     dispatch(addToCart({ ...product, quantity_p: 1,  increaseOne: true})); // increaseOne: add to cart one time
     fetchAddToCart({ ...dataFetch, quantity_p: 1 });
+    messageApi.success("Thêm vào giỏ hàng thành công!")
   };
   return (
     <>
-      <Link to={`/product/${product._id}`}>
-        <div className="product__item" key={index}>
-          
+    {contextHolder}
+      <Link to={`/product/${product._id}`} >
+        <div className="product__item" key={index} >
           <img
             src={product.image.url[0]}
             alt=""

@@ -21,7 +21,7 @@ const PurchaseUser = () => {
         url: "http://localhost:5000/api/transaction/user",
         headers: { "Content-Type": "application/json" },
       });
-      console.log(res.data.data);
+      console.log(new Date(res.data.data[0]['createdAt']).toDateString());
       setTransaction(res.data.data);
       setIsLoading(false)
     };
@@ -50,7 +50,10 @@ const PurchaseUser = () => {
                   transaction.map((item, index) => {
                     return (
                       <div className="purchase__order-item" key={index}>
+                        {/* <div><span>Đơn hàng mua vào : </span>
+                          <span>{new Date(item['createdAt']).toDateString()}</span></div> */}
                         <div className="purchase__order-nav">
+                          
                           <div className="purchase__order-shop">
                             <span className="purchase__order-shop-name">
                               {item.product?.shop.name}

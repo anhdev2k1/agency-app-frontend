@@ -1,6 +1,7 @@
-import { Button, Space, Table, Tag, Typography } from 'antd';
+import { Button, Button, Space, Table, Tag, Typography } from 'antd';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import './styles/manageProduct.scss';
 const { Paragraph } = Typography;
 
 const ManageProduct = () => {

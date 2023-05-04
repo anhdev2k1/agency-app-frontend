@@ -62,7 +62,6 @@
             img {
               width: 60px;
               height: 60px;
-              background-color: red;
             }
             .info__shop-btn {
               width: max-content;
@@ -209,4 +208,8 @@
       }
     }
   }
+}
+.ant-image-preview-img{
+  width: 500px !important;
+  height: 550px !important;
 }

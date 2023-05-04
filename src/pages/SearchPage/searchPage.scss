@@ -1,0 +1,17 @@
+.search__wrapper{
+    margin-top: 100px;
+    .search__wrapper-heading{
+        font-size: 2rem;
+        padding: 15px 0;
+    }
+    &-content{
+        width: 100%;
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        background-color: white;
+        padding: 10px;
+        border-radius: 10px;
+    }
+}

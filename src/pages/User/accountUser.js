@@ -9,6 +9,7 @@ const AccountUser = () => {
   const { newForm } = Form.useForm();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
+  console.log(user);
   const handleCreateFinish = (values) => {
     Object.filter = (obj, predicate) =>
       Object.keys(obj)
@@ -100,7 +101,7 @@ const AccountUser = () => {
                 </div>
               </Upload>
             </Form.Item>
-            <Form.Item label="Button">
+            <Form.Item>
               <Button type="primary" htmlType="submit">
                 Lưu
               </Button>

@@ -1,4 +1,4 @@
-import { Button, Checkbox, Form, Input, Modal } from "antd";
+import { Button, Checkbox, Form, Input, Modal, message } from "antd";
 import { LockOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,8 +6,10 @@ import { useState } from "react";
 import { checkUser } from "../../redux/features/userSlice";
 const ChangePasswordUser = () => {
   const { _id } = useSelector((state) => state.user.user);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [checkPass, setCheckPass] = useState("");
+  const [isAlert, setIsAlert] = useState(true);
+  const [messageApi, contextHolder] = message.useMessage();
   const updatePassword = async (data) => {
     const res = await axios({
       method: "PUT",
@@ -18,26 +20,34 @@ const ChangePasswordUser = () => {
     dispatch(checkUser(res.data.data));
   };
   const onFinish = (values) => {
-    const dataUpdate = { _id, ...values }
-    updatePassword(dataUpdate)
+    const dataUpdate = { _id, ...values };
+    updatePassword(dataUpdate);
     console.log(values);
   };
   const handleCheckPassword = (e) => {
     const { value } = e.target;
     const formData = { id: _id, password: value };
     const checkPassword = async () => {
-      const res = await axios({
-        method: "POST",
-        url: "http://localhost:5000/api/auth/user/password",
-        data: formData,
-        headers: { "Content-Type": "application/json" },
-      });
-      setCheckPass(res.data.status);
+      try {
+        const res = await axios({
+          method: "POST",
+          url: "http://localhost:5000/api/auth/user/password",
+          data: formData,
+          headers: { "Content-Type": "application/json" },
+        });
+        setCheckPass(res.data.status);
+        messageApi.success("Mật khẩu hiện tại đúng!");
+        setIsAlert(true)
+      } catch (error) {
+        setIsAlert(false)
+        messageApi.error("Mật khẩu hiện tại đã sai!");
+      }
     };
     checkPassword();
   };
   return (
     <div className="user__container">
+      {contextHolder}
       <div className="user__container-title">
         <h3 className="user__title-heading" style={{ fontSize: "2rem" }}>
           Đổi mật khẩu
@@ -64,9 +74,9 @@ const ChangePasswordUser = () => {
                   message: "Vui lòng nhập mật khẩu!",
                 },
                 { min: 6, message: "Độ dài tối thiểu 6 kí tự!" },
+                
               ]}
-              hasFeedback
-              // validateStatus={checkPass === "success" ? "success" : "error"}
+              // validateStatus={checkPass === "success" && "success"}
             >
               <Input.Password
                 name="password"

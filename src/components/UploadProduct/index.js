@@ -47,6 +47,7 @@ const UPLOAD = () => {
       });
     };
     createProduct();
+    newForm.resetFields()
   };
   return (
     <>

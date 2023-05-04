@@ -13,9 +13,6 @@ import {
   SafetyOutlined,
 } from "@ant-design/icons";
 import { Menu } from "antd";
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import axios from "axios";
 const SidebarSeller = () => {
   function getItem(label, key, icon, children, type) {
     return {

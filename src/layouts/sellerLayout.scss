@@ -1,8 +1,8 @@
-.seller__flex{
+.seller__flex, .admin__flex{
     margin-top: 100px;
     display: flex;
     gap: 15px;
-    .seller__content{
+    .seller__content, .admin__content{
         width: 100%;
         background-color: white;
         border-radius: 8px;

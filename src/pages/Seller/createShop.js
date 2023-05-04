@@ -41,6 +41,7 @@ const CreateShop = () => {
         headers: { "Content-Type": "application/json" },
       });
       if (res.data.status === "success") {
+        localStorage.setItem("page",JSON.stringify(res.data.data._id))
         navigate(`/shop/${res.data.data._id}`);
       } else {
         alert("Tạo cửa hàng lỗi");
