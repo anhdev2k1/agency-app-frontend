@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ShopProductForm from '../../components/UploadProduct';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function EditProduct() {
   let { id } = useParams();
@@ -23,6 +24,10 @@ function EditProduct() {
   }, [navigate, id]);
   return (
     <>
+      <Link
+        to={`/product/${id}`}
+        target='_blank'
+      >{`localhost:3000/product/${id}`}</Link>
       <ShopProductForm product={product} />
     </>
   );
