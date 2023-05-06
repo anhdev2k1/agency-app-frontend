@@ -1,12 +1,22 @@
-import { Button, Space, Table, Tag, Typography } from 'antd';
+import {
+  Button,
+  Popconfirm,
+  Space,
+  Table,
+  Tag,
+  Typography,
+  message,
+} from 'antd';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import './styles/manageProduct.scss';
+import { Link } from 'react-router-dom';
 const { Paragraph } = Typography;
 
 const ManageProduct = () => {
   const idShop = JSON.parse(localStorage.getItem('page')) || '';
   const [products, setProducts] = useState([]);
+  const [messageApi, contextHolder] = message.useMessage();
   useEffect(() => {
     const getProducts = async () => {
       if (idShop) {
@@ -55,18 +65,45 @@ const ManageProduct = () => {
     },
     {
       title: 'Thao tác',
+      dataIndex: '_id',
       key: 'action',
-      render: (_, record) => (
+      render: (id, record) => (
         <Space size='middle'>
-          <Button type='primary'>Edit</Button>
-          <Button danger>Xoá</Button>
+          <Button type='primary'>
+            <Link to={`/shop/editProduct/${id}`}>Edit</Link>
+          </Button>
+          <Popconfirm
+            title='Bạn có muốn xóa sản phẩm này?'
+            description={`${record.name}`}
+            onConfirm={() => handleDeleteProduct(id)}
+            okText='Xóa'
+            cancelText='Hủy'
+          >
+            <Button danger>Delete</Button>
+          </Popconfirm>
         </Space>
       ),
     },
   ];
 
+  const handleDeleteProduct = async (id) => {
+    const res = await axios({
+      method: 'DELETE',
+      url: `http://localhost:5000/api/product/${id}`,
+    });
+
+    if (res.status === 200) {
+      messageApi.open({
+        type: 'success',
+        content: 'Xóa sản phẩm thành công',
+      });
+      setProducts((pre) => pre.filter((p) => p._id !== id));
+    }
+  };
+
   return (
     <>
+      {contextHolder}
       <h1>Quản lý sản phẩm</h1>
       <Table columns={columns} dataSource={products} />
     </>

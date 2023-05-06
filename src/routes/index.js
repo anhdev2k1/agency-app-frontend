@@ -2,7 +2,6 @@ import Home from '../pages/Home/Home';
 import Explore from '../pages/Explore/explore';
 import Register from '../pages/Register/register';
 import Login from '../pages/Login/login';
-import UPLOAD from '../components/UploadProduct';
 import AccountUser from '../pages/User/accountUser';
 import AddressUser from '../pages/User/addressUser';
 import PasswordUser from '../pages/User/changePassword';
@@ -24,6 +23,8 @@ import ManageAdmin from '../pages/Admin/manageAdmin';
 import AddCategory from '../pages/Admin/AddCategory';
 import AllAccount from '../pages/Admin/allAccount';
 import SearchPage from '../pages/SearchPage';
+import CreateProduct from '../pages/Seller/createProduct';
+import EditProduct from '../pages/Seller/editProduct';
 const publicRoutes = [
   {
     path: '/',
@@ -127,7 +128,12 @@ const publicRoutes = [
   },
   {
     path: '/shop/createProduct',
-    component: UPLOAD,
+    component: CreateProduct,
+    layout: 'seller',
+  },
+  {
+    path: '/shop/editProduct/:id',
+    component: EditProduct,
     layout: 'seller',
   },
   {

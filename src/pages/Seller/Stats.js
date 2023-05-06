@@ -19,6 +19,7 @@ import {
   Row,
   Select,
   Space,
+  Spin,
   Statistic,
   Table,
 } from 'antd';
@@ -236,11 +237,13 @@ function Stats() {
         </Col>
         <Col span={9}>
           <Card title='Sản phẩm bán chạy'>
-            <Table
-              pagination={false}
-              columns={tableMostProductColumns}
-              dataSource={stats.mostProduct}
-            />
+            <Spin spinning={isLoading}>
+              <Table
+                pagination={false}
+                columns={tableMostProductColumns}
+                dataSource={stats.mostProduct}
+              />
+            </Spin>
           </Card>
         </Col>
         <Col span={15}>
@@ -279,7 +282,9 @@ function Stats() {
               </Space>
             }
           >
-            <Bar options={chartOptions} data={chartData} />
+            <Spin spinning={isLoading}>
+              <Bar options={chartOptions} data={chartData} />
+            </Spin>
           </Card>
         </Col>
       </Row>
