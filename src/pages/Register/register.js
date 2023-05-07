@@ -1,8 +1,8 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import { LockOutlined, UserOutlined, MailOutlined } from "@ant-design/icons";
 import "./register.scss";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -11,7 +11,9 @@ const Register = () => {
   const [form] = Form.useForm();
   const [currentUser, setCurrentUser] = useState({});
   const [error, setError] = useState("");
+  const [messageApi, contextHolder] = message.useMessage();
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const createUser = async (data) => {
     try {
       const res = await axios({
@@ -23,23 +25,23 @@ const Register = () => {
       dispatch(checkUser(res.data.data));
       setCurrentUser(res.data.data);
       localStorage.setItem("token", JSON.stringify(res.data.data.token));
+      messageApi.success("Đăng kí thành công! Đợi 1 tý nhé...")
+      setTimeout(() => {
+        navigate("/explore")
+      })
     } catch (error) {
       setError(error.response.data.error);
+      messageApi.error(`${error.response.data.error}`)
     }
   };
   const onFinish = (values) => {
-    console.log(values);
     const { confirm, ...rest } = values;
     createUser(rest);
   };
   return (
     <>
       <div className="form__container">
-        {Object.keys(currentUser).length !== 0 ? (
-          <Navigate to="/explore" replace="true" />
-        ) : (
-          <p>{error}</p>
-        )}
+      {contextHolder}
         <div className="circle__one circle"></div>
         <div className="circle__two circle"></div>
         <h2 className="form__container-title">ĐĂNG KÝ TÀI KHOẢN</h2>

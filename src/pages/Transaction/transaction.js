@@ -1,4 +1,4 @@
-import { Button, Form, Input, Radio, Select } from "antd";
+import { Button, Form, Input, Radio, Select, message } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -15,7 +15,7 @@ const Transaction = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const confirmOrder = JSON.parse(localStorage.getItem("order")) || [];
-  console.log(confirmOrder);
+  const [messageApi, contextHolder] = message.useMessage()
   useEffect(() => {
     const getCountry = async () => {
       const response = await axios({
@@ -55,23 +55,31 @@ const Transaction = () => {
     });
   };
   const handleBuy = (values) => {
-    const bills = {
-      user: user._id,
-      user_delivery: { ...values },
-      amount: getTotal(),
-      product: confirmOrder,
-      payment: checked,
-      shipping_fee: 15000,
-    };
-    createTransaction(bills);
-    navigate("/transaction/result", {
-      state: {
-        title: "Bạn đã mua hàng thành công!",
-        subTitle:
-          "Đơn hàng của bạn đã được thông báo tới người bán. Vui lòng đợi người bán xác nhận đơn hàng và chuyển giao đến đơn vị vận chuyển",
-        status: "success",
-      },
-    });
+    if(checked !== null ){
+      const bills = {
+        user: user._id,
+        user_delivery: { ...values },
+        amount: getTotal(),
+        product: confirmOrder,
+        payment: checked,
+        shipping_fee: 15000,
+      };
+      createTransaction(bills);
+      messageApi.loading("Đang xử lý giao dịch! Đợi 1 xý nhé...")
+      setTimeout(() => {
+        navigate("/transaction/result", {
+          state: {
+            title: "Bạn đã mua hàng thành công!",
+            subTitle:
+              "Đơn hàng của bạn đã được thông báo tới người bán. Vui lòng đợi người bán xác nhận đơn hàng và chuyển giao đến đơn vị vận chuyển",
+            status: "success",
+          },
+        });
+      },1000)
+    }else{
+      messageApi.error("Vui lòng chọn phương thức thanh toán")
+    }
+    
   };
   const onChange = (e) => {
     setChecked(e.target.value);
@@ -89,17 +97,21 @@ const Transaction = () => {
       shipping_fee: 15000,
     };
     createTransaction(bills);
-    navigate("/transaction/result", {
-      state: {
-        title: "Bạn đã thanh toán thành công!",
-        subTitle:
-          "Đơn hàng của bạn đã thanh toán thành công. Vui lòng đợi người bán xác nhận đơn hàng và chuyển giao đến đơn vị vận chuyển",
-        status: "success",
-      },
-    });
+    messageApi.loading("Đang xử lý giao dịch! Đợi 1 xý nhé...")
+    setTimeout(() => {
+      navigate("/transaction/result", {
+        state: {
+          title: "Bạn đã thanh toán thành công!",
+          subTitle:
+            "Đơn hàng của bạn đã thanh toán thành công. Vui lòng đợi người bán xác nhận đơn hàng và chuyển giao đến đơn vị vận chuyển",
+          status: "success",
+        },
+      });
+    })
   };
   return (
     <div className="transaction">
+      {contextHolder}
       <div className="container">
         {cart.length > 0 ? (
           <Form

@@ -25,14 +25,13 @@ const Login = () => {
       setCurrentUser(res.data.data);
       localStorage.setItem("token", JSON.stringify(res.data.data.token));
       messageApi.success("Đăng nhập thành công! Đợi 1 tý nhé...");
-      console.log(res.data.data);
       if (res.data.data.role === 3) {
         setTimeout(() => {
-          navigate("/explore");
+          navigate("/admin");
         }, 1000);
       }else{
         setTimeout(() => {
-          navigate("/admin");
+          navigate("/explore");
         }, 1000);
       }
     } catch (error) {

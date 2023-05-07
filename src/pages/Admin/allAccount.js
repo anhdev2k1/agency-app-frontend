@@ -1,7 +1,6 @@
 import { Button, Space, Table, Tag } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { AndroidOutlined, AppleOutlined } from "@ant-design/icons";
 import { Radio, Tabs } from "antd";
 import "./allAccount.scss"
 const AllAccount = () => {
@@ -25,7 +24,6 @@ const AllAccount = () => {
         url: `http://localhost:5000/api/auth/user/${data}`,
         headers: { "Content-Type": "application/json" },
       });
-      console.log(res.data);
     }
     deleteUser()
     setReload(true)
@@ -62,7 +60,7 @@ const AllAccount = () => {
         ) : role === 2 ? (
           <Tag color="green">Đối tác</Tag>
         ) : (
-          <Tag color="red">Chưa cập nhật địa chỉ</Tag>
+          <Tag color="pink">Quản trị viên</Tag>
         ),
     },
     {
@@ -91,7 +89,7 @@ const AllAccount = () => {
         label: `Người dùng`,
         key: 1,
         children: (
-          <Table columns={columns} dataSource={users.filter(role => role.role === 1 || role.role === 2)} />
+          <Table columns={columns} dataSource={users.filter(role => role.role === 1 || role.role === 2 || role.role === 3)} />
         ),
       },
       {
@@ -99,6 +97,13 @@ const AllAccount = () => {
         key: 2,
         children: (
           <Table columns={columns} dataSource={users.filter(role => role.role === 2)} />
+        ),
+      },
+      {
+        label: `Quản trị viên`,
+        key: 3,
+        children: (
+          <Table columns={columns} dataSource={users.filter(role => role.role === 3)} />
         ),
       },
   ]
