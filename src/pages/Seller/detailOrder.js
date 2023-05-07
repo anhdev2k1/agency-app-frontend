@@ -3,10 +3,6 @@ import {
   BarcodeOutlined,
   CommentOutlined,
   FileDoneOutlined,
-  FileSyncOutlined,
-  CarOutlined,
-  CarryOutOutlined,
-  StopOutlined,
 } from "@ant-design/icons";
 import { Form, Select, Spin, Timeline } from "antd";
 import "./styles/detailOrder.scss";

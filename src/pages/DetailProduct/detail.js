@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./detail.scss";
-import { Tabs, Spin } from "antd";
+import { Tabs, Spin, message } from "antd";
 import {
   ShopOutlined,
   ShoppingOutlined,
@@ -60,7 +60,9 @@ const DetailProduct = () => {
       {
         key: "2",
         label: `Đánh giá sản phẩm`,
-        children: `Content of Tab Pane 2`,
+        children: (
+          <p>Hiện chưa có đánh giá nào</p>
+        ),
       },
     ];
     return items;
@@ -81,21 +83,30 @@ const DetailProduct = () => {
     getProduct();
   }, []);
   const navigate = useNavigate();
+  const [messageApi, contextHolder] = message.useMessage()
   const handleBuy = () => {
-    if (cart) {
-      dispatch(confirmOrder({ ...dataProduct, quantity_p: cart.quantity_p }));
-      localStorage.setItem(
-        "order",
-        JSON.stringify([{ ...dataProduct, quantity_p: cart.quantity_p }])
-      );
-    } else {
-      dispatch(confirmOrder({ ...dataProduct, quantity_p: quantityProduct }));
-      localStorage.setItem(
-        "order",
-        JSON.stringify([{ ...dataProduct, quantity_p: quantityProduct }])
-      );
+    console.log(cart);
+    if(Object.keys(user).length > 0){
+      if (typeof cart !== 'undefined') {
+        dispatch(confirmOrder({ ...dataProduct, quantity_p: cart.quantity_p }));
+        localStorage.setItem(
+          "order",
+          JSON.stringify([{ ...dataProduct, quantity_p: cart.quantity_p }])
+        );
+      } else {
+        dispatch(confirmOrder({ ...dataProduct, quantity_p: quantityProduct }));
+        localStorage.setItem(
+          "order",
+          JSON.stringify([{ ...dataProduct, quantity_p: quantityProduct }])
+        );
+      }
+      messageApi.loading("Đợi 1 tý nhé!...")
+      setTimeout(() => {
+        navigate("/transaction");
+      },1000)
+    }else{
+      messageApi.warning("Vui lòng đăng nhập!")
     }
-    navigate("/transaction");
   };
   const fetchAddToCart = async (data) => {
     const res = await axios({
@@ -106,31 +117,36 @@ const DetailProduct = () => {
     });
   };
   const handleAddToCart = () => {
-    const dataFetch = {
-      productId: id,
-      userId: user._id,
-    };
-    
-    if (cart) {
- 
-      dispatch(addToCart({ ...dataProduct, quantity_p: cart.quantity_p }));
-      fetchAddToCart({ ...dataFetch, quantity_p: cart.quantity_p });
-    } else {
- 
-      dispatch(addToCart({ ...dataProduct, quantity_p: quantityProduct }));
-      fetchAddToCart({ ...dataFetch, quantity_p: quantityProduct });
+    if(Object.keys(user).length > 0 ){
+      const dataFetch = {
+        productId: id,
+        userId: user._id,
+      };
+      if (cart) {
+   
+        dispatch(addToCart({ ...dataProduct, quantity_p: cart.quantity_p }));
+        fetchAddToCart({ ...dataFetch, quantity_p: cart.quantity_p });
+      } else {
+   
+        dispatch(addToCart({ ...dataProduct, quantity_p: quantityProduct }));
+        fetchAddToCart({ ...dataFetch, quantity_p: quantityProduct });
+      }
+      messageApi.success("Đã thêm vào giỏ hàng!")
+    }else{
+      messageApi.warning("Vui lòng đăng nhập!")
     }
   };
   return (
     <>
+    {contextHolder}
       <div className="detail">
         <div className="container">
           {Object.keys(dataProduct).length === 0 ? (
-            <Spin />
+            <span style={{fontSize: "1.7rem"}}>Đang load sản phẩm...</span>
           ) : (
             <div className="detail__container">
               <div className="detail__container-img">
-                <Image src={dataProduct.image.url[0]} alt="" />
+                <Image src={dataProduct.image.url[0]} alt="" className="img"/>
               </div>
               <div className="detail__container-info">
                 <h3 className="detail__info-shop">{dataProduct.shop.name}</h3>

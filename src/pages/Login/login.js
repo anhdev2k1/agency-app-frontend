@@ -1,15 +1,18 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { checkUser } from "../../redux/features/userSlice";
+import "./login.scss"
 const Login = () => {
   const [form] = Form.useForm();
   const [currentUser, setCurrentUser] = useState({});
   const [error, setError] = useState("");
   const dispatch = useDispatch();
+  const [messageApi, contextHolder] = message.useMessage();
+  const navigate = useNavigate()
   const createUser = async (data) => {
     try {
       const res = await axios({
@@ -21,8 +24,13 @@ const Login = () => {
       dispatch(checkUser(res.data.data));
       setCurrentUser(res.data.data);
       localStorage.setItem("token", JSON.stringify(res.data.data.token));
+      messageApi.success("Đăng nhập thành công! Đợi 1 tý nhé...")
+      setTimeout(() => {
+        navigate("/explore")
+      },1000)
     } catch (error) {
       setError(error.response.data.error);
+      messageApi.error(`${error.response.data.error}`)
     }
   };
   const onFinish = (values) => {
@@ -31,11 +39,12 @@ const Login = () => {
   return (
     <>
       <div className="form__container">
-        {Object.keys(currentUser).length !== 0 ? (
+        {/* {Object.keys(currentUser).length !== 0 ? (
           <Navigate to="/explore" replace="true" />
         ) : (
           <p>{error}</p>
-        )}
+        )} */}
+        {contextHolder}
         <div className="circle__one circle"></div>
         <div className="circle__two circle"></div>
         <h2 className="form__container-title">ĐĂNG NHẬP TÀI KHOẢN</h2>
@@ -86,6 +95,7 @@ const Login = () => {
           <Button type="primary" htmlType="submit" className="form__btn">
             Đăng nhập
           </Button>
+          <span className="redirect__register">Nếu bạn chưa có tài khoản ? <Link to="/register">Đăng kí tại đây</Link></span>
         </Form>
       </div>
     </>

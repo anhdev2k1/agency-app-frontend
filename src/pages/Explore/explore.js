@@ -8,6 +8,7 @@ import axios from "axios";
 import Product from "../../components/Product/product";
 import { Spin } from "antd";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Explore = () => {
   const settings = {
     infinite: true,
@@ -18,6 +19,7 @@ const Explore = () => {
   const [productSpecial, setProductSpecial] = useState([]);
   const [categories, setCategories] = useState([])
   const [isLoading, setIsLoading] = useState(true);
+  
   const getProductSpecial = async () => {
     setIsLoading(true);
     const res = await axios({
@@ -53,7 +55,7 @@ const Explore = () => {
           </div>
           <div className="explore__category-slides">
             {isLoading ? (
-              <Spin />
+              <span style={{fontSize: "1.5rem"}}>Đang load danh mục...</span>
             ) : (
               <Slider {...settings} className="slides">
                 {categories.map((cate,index) => {
@@ -71,12 +73,12 @@ const Explore = () => {
         </div>
         <div className="product__special">
           <div className="product__special-title">
-            <h3>Sản phẩm thịnh hành</h3>
+            <h3>Sản phẩm mới</h3>
             <span>Xem thêm</span>
           </div>
           <div className="product__special-slides">
             {isLoading ? (
-              <Spin />
+              <span style={{fontSize: "1.7rem"}}>Đang load sản phẩm...</span>
             ) : (
               <Slider {...settings}>
                 {productSpecial ? (
@@ -84,7 +86,7 @@ const Explore = () => {
                     return <Product index={index} product={product} />;
                   })
                 ) : (
-                  <Spin />
+                  <span style={{fontSize: "1.5rem"}}>Đang load sản phẩm...</span>
                 )}
               </Slider>
             )}

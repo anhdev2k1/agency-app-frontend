@@ -21,9 +21,9 @@ const Navbar = () => {
   const cart = useSelector((state) => state.cart.cart);
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState({});
-  const [searchData, setSearchData] = useState("")
+  const [searchData, setSearchData] = useState("");
   const [messageApi, contextHolder] = message.useMessage();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   useEffect(() => {
     setCurrentUser(user);
   }, [user]);
@@ -38,22 +38,29 @@ const Navbar = () => {
           url: `http://localhost:5000/api/shop/${user._id}/content`,
           headers: { "Content-Type": "application/json" },
         });
-        localStorage.setItem("page",JSON.stringify(res.data.data._id))
+        localStorage.setItem("page", JSON.stringify(res.data.data._id));
         navigate(`/shop/${res.data.data._id}`);
       };
       getShop();
     }
   };
   const handleSearch = (e) => {
-    e.preventDefault()
-    if(searchData.length === 0){
-      messageApi.warning("Vui lòng nhập thông tin cần tìm kiếm!")
-    }else{
-      dispatch(checkDataSearch(searchData))
-      navigate(`/product/search?q=${searchData}`)
-      setSearchData("")
+    e.preventDefault();
+    if (searchData.length === 0) {
+      messageApi.warning("Vui lòng nhập thông tin cần tìm kiếm!");
+    } else {
+      dispatch(checkDataSearch(searchData));
+      navigate(`/product/search?q=${searchData}`);
+      setSearchData("");
     }
-    
+  };
+  const handleLogout = (e) => {
+    e.preventDefault()
+    localStorage.removeItem("token")
+    messageApi.loading("Đang đăng xuất...")
+    setTimeout(() => {
+      navigate("/login")
+    },1000)
   }
   return (
     <nav className="navbar">
@@ -68,10 +75,14 @@ const Navbar = () => {
             <span>Kênh người bán</span>
           </div>
           <div className="navbar__search">
-            
-            <input type="text" class="navbar__search-input" value={searchData} onChange={(e) => setSearchData(e.target.value)}/>
+            <input
+              type="text"
+              class="navbar__search-input"
+              value={searchData}
+              onChange={(e) => setSearchData(e.target.value)}
+            />
             <div class="navbar__search-btn" onClick={handleSearch}>
-            <SearchOutlined />
+              <SearchOutlined />
             </div>
           </div>
           <div className="navbar__ultis">
@@ -125,7 +136,7 @@ const Navbar = () => {
                   <ContainerOutlined style={{ marginRight: "5px" }} />
                   <li>Đơn hàng</li>
                 </Link>
-                <Link to="" className="user__dropdown-item">
+                <Link to="" className="user__dropdown-item" onClick={handleLogout}>
                   <LogoutOutlined style={{ marginRight: "5px" }} />
                   <li>Đăng xuất</li>
                 </Link>
