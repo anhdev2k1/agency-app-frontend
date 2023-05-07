@@ -11,7 +11,7 @@ import {
 } from 'antd';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { uploadToCloudinary } from '../../cloudinary/cloudinaryHelper';
 const ShopProductForm = (props) => {
   const { TextArea } = Input;
@@ -84,7 +84,6 @@ const ShopProductForm = (props) => {
           content: 'Cập nhật sản phẩm thành công',
         });
       }
-      console.log(values);
     };
 
     if (props.product && Object.keys(props.product).length > 0) {
@@ -99,10 +98,10 @@ const ShopProductForm = (props) => {
       {contextHolder}
       <Form
         labelCol={{
-          span: 4,
+          span: 6,
         }}
         wrapperCol={{
-          span: 14,
+          span: 18,
         }}
         layout='horizontal'
         style={{
@@ -111,6 +110,14 @@ const ShopProductForm = (props) => {
         onFinish={handleSubmitProductForm}
         form={newForm}
       >
+        {props.product && Object.keys(props.product).length > 0 && (
+          <Form.Item label='Đường dẫn'>
+            <Link
+              to={`/product/${props.product._id}`}
+              target='_blank'
+            >{`localhost:3000/product/${props.product._id}`}</Link>
+          </Form.Item>
+        )}
         <Form.Item label='Tên sản phẩm' name='name'>
           <Input name='name' />
         </Form.Item>
@@ -163,17 +170,21 @@ const ShopProductForm = (props) => {
             </div>
           </Upload>
         </Form.Item>
-        <Image
-          width={200}
-          src={
-            props.product &&
-            Object.keys(props.product).length > 0 &&
-            props.product.image.url[0]
-          }
-        />
-        <Form.Item label='Thêm'>
+        {props.product && Object.keys(props.product).length > 0 && (
+          <Form.Item label='Ảnh sản phẩm'>
+            <Image width={200} src={props.product.image.url[0]} />
+          </Form.Item>
+        )}
+        <Form.Item
+          wrapperCol={{
+            offset: 6,
+            span: 18,
+          }}
+        >
           <Button type='primary' htmlType='submit'>
-            Button
+            {props.product && Object.keys(props.product).length > 0
+              ? 'Cập nhật'
+              : 'Thêm mới'}
           </Button>
         </Form.Item>
       </Form>

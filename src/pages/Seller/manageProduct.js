@@ -65,24 +65,24 @@ const ManageProduct = () => {
     },
     {
       title: 'Thao tác',
-      dataIndex: '_id',
       key: 'action',
-      render: (id, record) => (
-        <Space size='middle'>
-          <Button type='primary'>
-            <Link to={`/shop/editProduct/${id}`}>Edit</Link>
-          </Button>
-          <Popconfirm
-            title='Bạn có muốn xóa sản phẩm này?'
-            description={`${record.name}`}
-            onConfirm={() => handleDeleteProduct(id)}
-            okText='Xóa'
-            cancelText='Hủy'
-          >
-            <Button danger>Delete</Button>
-          </Popconfirm>
-        </Space>
-      ),
+      render: (_, record) =>
+        !record.deletedAt && (
+          <Space size='middle'>
+            <Button type='primary'>
+              <Link to={`/shop/editProduct/${record._id}`}>Edit</Link>
+            </Button>
+            <Popconfirm
+              title='Bạn có muốn xóa sản phẩm này?'
+              description={`${record.name}`}
+              onConfirm={() => handleDeleteProduct(record._id)}
+              okText='Xóa'
+              cancelText='Hủy'
+            >
+              <Button danger>Delete</Button>
+            </Popconfirm>
+          </Space>
+        ),
     },
   ];
 
@@ -97,15 +97,28 @@ const ManageProduct = () => {
         type: 'success',
         content: 'Xóa sản phẩm thành công',
       });
-      setProducts((pre) => pre.filter((p) => p._id !== id));
+      setProducts(
+        (pre) => (pre[pre.indexOf((p) => p.deletedAt)].deletedAt = new Date())
+      );
     }
+  };
+
+  const rowClassName = (record) => {
+    if (record.deletedAt) {
+      return 'ant-table-row-red';
+    }
+    return '';
   };
 
   return (
     <>
       {contextHolder}
       <h1>Quản lý sản phẩm</h1>
-      <Table columns={columns} dataSource={products} />
+      <Table
+        columns={columns}
+        dataSource={products}
+        rowClassName={rowClassName}
+      />
     </>
   );
 };
