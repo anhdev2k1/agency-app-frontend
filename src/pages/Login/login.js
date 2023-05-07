@@ -5,14 +5,14 @@ import { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { checkUser } from "../../redux/features/userSlice";
-import "./login.scss"
+import "./login.scss";
 const Login = () => {
   const [form] = Form.useForm();
   const [currentUser, setCurrentUser] = useState({});
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const [messageApi, contextHolder] = message.useMessage();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const createUser = async (data) => {
     try {
       const res = await axios({
@@ -24,13 +24,20 @@ const Login = () => {
       dispatch(checkUser(res.data.data));
       setCurrentUser(res.data.data);
       localStorage.setItem("token", JSON.stringify(res.data.data.token));
-      messageApi.success("Đăng nhập thành công! Đợi 1 tý nhé...")
-      setTimeout(() => {
-        navigate("/explore")
-      },1000)
+      messageApi.success("Đăng nhập thành công! Đợi 1 tý nhé...");
+      console.log(res.data.data);
+      if (res.data.data.role === 3) {
+        setTimeout(() => {
+          navigate("/explore");
+        }, 1000);
+      }else{
+        setTimeout(() => {
+          navigate("/admin");
+        }, 1000);
+      }
     } catch (error) {
       setError(error.response.data.error);
-      messageApi.error(`${error.response.data.error}`)
+      messageApi.error(`${error.response.data.error}`);
     }
   };
   const onFinish = (values) => {
@@ -95,7 +102,10 @@ const Login = () => {
           <Button type="primary" htmlType="submit" className="form__btn">
             Đăng nhập
           </Button>
-          <span className="redirect__register">Nếu bạn chưa có tài khoản ? <Link to="/register">Đăng kí tại đây</Link></span>
+          <span className="redirect__register">
+            Nếu bạn chưa có tài khoản ?{" "}
+            <Link to="/register">Đăng kí tại đây</Link>
+          </span>
         </Form>
       </div>
     </>
