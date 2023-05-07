@@ -5,6 +5,7 @@ import { addToCart } from "../../redux/features/CartSlice";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { message } from "antd";
+import { useRef } from "react";
 const Product = (props) => {
   const { index, product } = props;
   const dispatch = useDispatch();
@@ -18,8 +19,9 @@ const Product = (props) => {
       headers: { "Content-Type": "application/json" },
     });
   };
+
   const handleAddToCart = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if(Object.keys(user).length > 0){
       const dataFetch = {
         productId: product._id,
@@ -34,17 +36,17 @@ const Product = (props) => {
     }
   };
   const navigate = useNavigate()
-  const handleDetail = (e) => {
-    e.preventDefault()
-    messageApi.loading("Đợi 1 tý nhé...")
-    setTimeout(() => {
-      navigate(`/product/${product._id}`)
-    },1000)
-  }
+  // const handleDetail = (e) => {
+  //   e.preventDefault()
+  //   messageApi.loading("Đợi 1 tý nhé...")
+  //   setTimeout(() => {
+  //     navigate(`/product/${product._id}`)
+  //   },1000)
+  // }
   return (
     <>
     {contextHolder}
-      <div onClick={handleDetail}>
+      <Link to={`/product/${product._id}`} >
         <div className="product__item" key={index} >
           <img
             src={product.image.url[0]}
@@ -62,12 +64,12 @@ const Product = (props) => {
             </div>
           </div>
           <div className="product__hover">
-            <div className="product__hover-btn" onClick={handleAddToCart}>
+            <div className="product__hover-btn"  onClick={handleAddToCart}>
               <ShoppingOutlined />
             </div>
           </div>
         </div>
-      </div>
+      </Link>
     </>
   );
 };
