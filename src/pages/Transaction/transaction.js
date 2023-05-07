@@ -14,7 +14,8 @@ const Transaction = () => {
   const [checked, setChecked] = useState(null);
   const [form] = Form.useForm();
   const navigate = useNavigate();
-  const confirmOrder = JSON.parse(localStorage.getItem("order"));
+  const confirmOrder = JSON.parse(localStorage.getItem("order")) || [];
+  console.log(confirmOrder);
   useEffect(() => {
     const getCountry = async () => {
       const response = await axios({
@@ -264,7 +265,7 @@ const Transaction = () => {
             </div>
             <div className="transaction__order">
               <div className="transaction__order-list">
-                {confirmOrder.map((item) => {
+                {confirmOrder.length > 0 && confirmOrder.map((item) => {
                   return (
                     <div className="order__list-item">
                       <img

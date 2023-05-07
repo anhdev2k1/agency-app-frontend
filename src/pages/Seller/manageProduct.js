@@ -14,7 +14,6 @@ const ManageProduct = () => {
             url: `http://localhost:5000/api/products/${idShop}`,
             headers: { "Content-Type": "application/json" }
         })
-        console.log(res.data.data);
         setProducts(res.data.data)
     }
     

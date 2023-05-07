@@ -2,9 +2,10 @@ import { Button, Form, Input } from "antd";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { checkUser } from "../../redux/features/userSlice";
+import "./login.scss"
 const Login = () => {
   const [form] = Form.useForm();
   const [currentUser, setCurrentUser] = useState({});
@@ -86,6 +87,7 @@ const Login = () => {
           <Button type="primary" htmlType="submit" className="form__btn">
             Đăng nhập
           </Button>
+          <span className="redirect__register">Nếu bạn chưa có tài khoản ? <Link to="/register">Đăng kí tại đây</Link></span>
         </Form>
       </div>
     </>

@@ -33,13 +33,7 @@ const SidebarSeller = () => {
         "1",
         <IdcardOutlined />
       ),
-      getItem(
-        <Link to="/shop/category">
-          <span>Danh mục shop</span>
-        </Link>,
-        "2",
-        <HomeOutlined />
-      ),
+      
     ]),
 
     getItem("Quản lý đơn hàng", "sub2", <FileTextOutlined />, [
@@ -49,13 +43,6 @@ const SidebarSeller = () => {
         </Link>,
         "3",
         <FileDoneOutlined />
-      ),
-      getItem(
-        <Link to="/shop/orderFail">
-          <span>Đơn hủy</span>
-        </Link>,
-        "4",
-        <MessageOutlined />
       ),
     ]),
     getItem("Quản lý sản phẩm", "sub3", <FileTextOutlined />, [
