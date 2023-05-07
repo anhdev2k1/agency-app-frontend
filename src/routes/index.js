@@ -27,6 +27,7 @@ import CreateProduct from '../pages/Seller/createProduct';
 import EditProduct from '../pages/Seller/editProduct';
 import Categories from '../pages/Admin/Categories';
 import EditCategory from '../pages/Admin/EditCategory';
+import AdminStats from '../pages/Admin/AdminStats';
 const publicRoutes = [
   {
     path: '/',
@@ -192,7 +193,7 @@ const publicRoutes = [
   },
   {
     path: '/admin/stats',
-    component: AddCategory,
+    component: AdminStats,
     layout: 'admin',
   },
 ];
