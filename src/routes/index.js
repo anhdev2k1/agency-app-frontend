@@ -25,6 +25,8 @@ import AllAccount from '../pages/Admin/allAccount';
 import SearchPage from '../pages/SearchPage';
 import CreateProduct from '../pages/Seller/createProduct';
 import EditProduct from '../pages/Seller/editProduct';
+import Categories from '../pages/Admin/Categories';
+import EditCategory from '../pages/Admin/EditCategory';
 const publicRoutes = [
   {
     path: '/',
@@ -154,8 +156,18 @@ const publicRoutes = [
     layout: 'admin',
   },
   {
-    path: '/admin/category',
+    path: '/admin/categories',
+    component: Categories,
+    layout: 'admin',
+  },
+  {
+    path: '/admin/category/new',
     component: AddCategory,
+    layout: 'admin',
+  },
+  {
+    path: '/admin/category/:id/edit',
+    component: EditCategory,
     layout: 'admin',
   },
   {
@@ -179,54 +191,7 @@ const publicRoutes = [
     layout: 'admin',
   },
   {
-    path: '/admin/statAccount',
-    component: AddCategory,
-    layout: 'admin',
-  },
-  {
-    path: '/admin/statSeller',
-    component: AddCategory,
-    layout: 'admin',
-  },
-
-  /*-------Admin ROUTE-------- */
-  {
-    path: '/admin',
-    component: ManageAdmin,
-    layout: 'admin',
-  },
-  {
-    path: '/admin/category',
-    component: AddCategory,
-    layout: 'admin',
-  },
-  {
-    path: '/admin/accounts',
-    component: AllAccount,
-    layout: 'admin',
-  },
-  {
-    path: '/admin/accountSeller',
-    component: AddCategory,
-    layout: 'admin',
-  },
-  {
-    path: '/admin/accountUser',
-    component: AddCategory,
-    layout: 'admin',
-  },
-  {
-    path: '/admin/productInfringe',
-    component: AddCategory,
-    layout: 'admin',
-  },
-  {
-    path: '/admin/statAccount',
-    component: AddCategory,
-    layout: 'admin',
-  },
-  {
-    path: '/admin/statSeller',
+    path: '/admin/stats',
     component: AddCategory,
     layout: 'admin',
   },

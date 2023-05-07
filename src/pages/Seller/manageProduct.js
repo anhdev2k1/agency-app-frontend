@@ -97,9 +97,17 @@ const ManageProduct = () => {
         type: 'success',
         content: 'Xóa sản phẩm thành công',
       });
-      setProducts(
-        (pre) => (pre[pre.indexOf((p) => p.deletedAt)].deletedAt = new Date())
-      );
+      setProducts((prev) => {
+        return prev.map((category) => {
+          if (category._id === res.data.data._id) {
+            return {
+              ...category,
+              deletedAt: res.data.data.deletedAt,
+            };
+          }
+          return category;
+        });
+      });
     }
   };
 
