@@ -22,7 +22,7 @@ const PurchaseUser = () => {
     const updateOrder = async () => {
       await axios({
         method: "PUT",
-        url: `http://localhost:5000/api/order/${id}`,
+        url: `http://localhost:5000/api/transaction/${id}`,
         data,
         headers: { "Content-Type": "application/json" }
       })

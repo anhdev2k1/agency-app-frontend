@@ -68,6 +68,7 @@ const ProfileShop = () => {
         data: data,
         headers: { "Content-Type": "application/json" },
       });
+      console.log(res.data);
     };
     createPage();
   };

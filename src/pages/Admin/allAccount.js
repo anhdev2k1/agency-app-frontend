@@ -25,7 +25,7 @@ const AllAccount = () => {
         headers: { "Content-Type": "application/json" },
       });
     }
-    deleteUser()
+    // deleteUser()
     setReload(true)
   }
   const columns = [

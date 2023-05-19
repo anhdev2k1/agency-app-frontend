@@ -28,7 +28,7 @@ const Register = () => {
       messageApi.success("Đăng kí thành công! Đợi 1 tý nhé...")
       setTimeout(() => {
         navigate("/explore")
-      })
+      },1000)
     } catch (error) {
       setError(error.response.data.error);
       messageApi.error(`${error.response.data.error}`)

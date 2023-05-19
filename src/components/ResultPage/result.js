@@ -12,7 +12,7 @@ const ResultPage = () => {
         subTitle={subTitle}
         extra={[
           <>
-            <Link>
+            <Link to="/user/purchase">
               <Button type="primary" key="console">
                 Kiểm tra đơn hàng
               </Button>
