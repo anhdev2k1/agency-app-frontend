@@ -33,22 +33,29 @@ const SidebarAdmin = () => {
         '1',
         <IdcardOutlined />
       ),
-    ]),
-
-    getItem('Quản lý vi phạm', 'sub2', <FileTextOutlined />, [
       getItem(
-        <Link to='/admin/productInfringe'>
-          <span>Sản phẩm vi phạm</span>
+        <Link to={`/admin/partner`}>
+          <span>Duyệt đối tác</span>
         </Link>,
-        '4',
-        <FileDoneOutlined />
+        '2',
+        <IdcardOutlined />
       ),
     ]),
+
+    // getItem('Quản lý vi phạm', 'sub2', <FileTextOutlined />, [
+    //   getItem(
+    //     <Link to='/admin/productInfringe'>
+    //       <span>Sản phẩm vi phạm</span>
+    //     </Link>,
+    //     '3',
+    //     <FileDoneOutlined />
+    //   ),
+    // ]),
     getItem(
       <Link to='/admin/stats'>
         <span>Thống kê</span>
       </Link>,
-      'link',
+      '4',
       <FileTextOutlined />
     ),
     getItem('Quản lý danh mục', 'sub4', <FileTextOutlined />, [
@@ -56,14 +63,14 @@ const SidebarAdmin = () => {
         <Link to='/admin/categories'>
           <span>Tất cả</span>
         </Link>,
-        '6',
+        '5',
         <FileDoneOutlined />
       ),
       getItem(
         <Link to='/admin/category/new'>
           <span>Thêm danh mục</span>
         </Link>,
-        '7',
+        '6',
         <FileDoneOutlined />
       ),
     ]),

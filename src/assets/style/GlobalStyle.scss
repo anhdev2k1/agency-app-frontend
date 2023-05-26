@@ -24,6 +24,9 @@ html {
   font-family: $primary-font;
   overflow-x: hidden;
 }
+body{
+  position: relative;
+}
 .container {
   width: 1200px;
   margin: 0 auto;

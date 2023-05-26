@@ -15,6 +15,7 @@ const Transaction = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const confirmOrder = JSON.parse(localStorage.getItem("order")) || [];
+  console.log(confirmOrder);
   const [messageApi, contextHolder] = message.useMessage()
   useEffect(() => {
     const getCountry = async () => {
@@ -113,7 +114,7 @@ const Transaction = () => {
     <div className="transaction">
       {contextHolder}
       <div className="container">
-        {cart.length > 0 ? (
+        {confirmOrder.length > 0 ? (
           <Form
             form={form}
             className="transaction__container"

@@ -35,7 +35,6 @@ const Product = (props) => {
       messageApi.warning("Vui lòng đăng nhập!")
     }
   };
-  const navigate = useNavigate()
   // const handleDetail = (e) => {
   //   e.preventDefault()
   //   messageApi.loading("Đợi 1 tý nhé...")
@@ -46,7 +45,7 @@ const Product = (props) => {
   return (
     <>
     {contextHolder}
-      <Link to={`/product/${product._id}`} >
+      <Link to={`/product/${product._id}/shop/${product.shop._id}`} >
         <div className="product__item" key={index} >
           <img
             src={product.image.url[0]}

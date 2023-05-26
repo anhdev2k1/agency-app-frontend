@@ -15,20 +15,34 @@ import {
   decrementQuantity,
   incrementQuantity,
 } from "../../redux/features/CartSlice";
-import { Image } from 'antd';
+import { Image } from "antd";
 import avt from "../../assets/images/avt-user.png";
+import convertDateTime from "../../ultis/convertDateTime";
+import Product from "../../components/Product/product";
+import Slider from "react-slick";
 const DetailProduct = () => {
   const { id } = useParams();
+  const { idShop } = useParams();
   const user = useSelector((state) => state.user.user);
+
   const dispatch = useDispatch();
+  const [dataProduct, setDataProduct] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [dataFeedback, setDataFeedback] = useState([]);
+  const settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+  };
   const cart = useSelector((state) =>
     state.cart.cart.find((item) => item._id === id)
   );
-  const onChange = (key) => {
-  };
+  const onChange = (key) => {};
   const [quantityProduct, setQuantityProduct] = useState(1);
 
-  const setTab = (data) => {
+  const setTab = (data, feedbacks) => {
+    console.log(feedbacks);
     const items = [
       {
         key: "1",
@@ -44,7 +58,14 @@ const DetailProduct = () => {
             <div className="tab__info-shop">
               <span>Thông tin cửa hàng: </span>
               <div className="info__shop-wrapper">
-                <img src={Object.keys(data.shop?.user).length > 0 ? data.shop.user?.url?.url[0] : avt } alt="" />
+                <img
+                  src={
+                    Object.keys(data.shop?.user).length > 0
+                      ? data.shop.user?.url?.url[0]
+                      : avt
+                  }
+                  alt=""
+                />
                 <div className="info__shop-title">
                   <h3>{data.shop.name}</h3>
                   <div className="info__shop-btn">
@@ -61,33 +82,70 @@ const DetailProduct = () => {
         key: "2",
         label: `Đánh giá sản phẩm`,
         children: (
-          <p>Hiện chưa có đánh giá nào</p>
+          <div class="list__feedback">
+            {feedbacks.length > 0 ? (
+              feedbacks.map((item) => {
+                return (
+                  <div class="feedback__item">
+                    <h4>{item.user?.name}</h4>
+                    <span>{convertDateTime(item.createdAt)}</span>
+                    <p>{item.content}</p>
+                  </div>
+                );
+              })
+            ) : (
+              <p>Không có đánh giá cho sản phẩm này</p>
+            )}
+          </div>
         ),
       },
     ];
     return items;
   };
 
-  const [dataProduct, setDataProduct] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
-  const getProduct = async () => {
+  useEffect(() => {
+    const getProduct = async () => {
+      setIsLoading(true);
+      const res = await axios({
+        method: "GET",
+        url: `http://localhost:5000/api/product/${id}`,
+      });
+      setDataProduct(res.data.data);
+      setIsLoading(false);
+    };
+    getProduct();
+  }, [id]);
+
+  const getDataFeedbacks = async () => {
     setIsLoading(true);
     const res = await axios({
       method: "GET",
-      url: `http://localhost:5000/api/product/${id}`,
+      url: `http://localhost:5000/api/feedback/${id}`,
     });
-    setDataProduct(res.data.data);
+    setDataFeedback(res.data.data);
     setIsLoading(false);
   };
+  const [listProductByShop, setListProductByShop] = useState([]);
   useEffect(() => {
-    getProduct();
+    const getProducts = async () => {
+      const res = await axios({
+        method: "GET",
+        url: `http://localhost:5000/api/products/${idShop}`,
+      });
+      setListProductByShop(res.data.data);
+      setIsLoading(false);
+    };
+    getProducts();
+  }, []);
+
+  useEffect(() => {
+    getDataFeedbacks();
   }, []);
   const navigate = useNavigate();
-  const [messageApi, contextHolder] = message.useMessage()
+  const [messageApi, contextHolder] = message.useMessage();
   const handleBuy = () => {
-    console.log(cart);
-    if(Object.keys(user).length > 0){
-      if (typeof cart !== 'undefined') {
+    if (Object.keys(user).length > 0) {
+      if (typeof cart !== "undefined") {
         dispatch(confirmOrder({ ...dataProduct, quantity_p: cart.quantity_p }));
         localStorage.setItem(
           "order",
@@ -100,12 +158,12 @@ const DetailProduct = () => {
           JSON.stringify([{ ...dataProduct, quantity_p: quantityProduct }])
         );
       }
-      messageApi.loading("Đợi 1 tý nhé!...")
+      messageApi.loading("Đợi 1 tý nhé!...");
       setTimeout(() => {
         navigate("/transaction");
-      },1000)
-    }else{
-      messageApi.warning("Vui lòng đăng nhập!")
+      }, 1000);
+    } else {
+      messageApi.warning("Vui lòng đăng nhập!");
     }
   };
   const fetchAddToCart = async (data) => {
@@ -117,61 +175,56 @@ const DetailProduct = () => {
     });
   };
   const handleAddToCart = () => {
-    if(Object.keys(user).length > 0 ){
+    if (Object.keys(user).length > 0) {
       const dataFetch = {
         productId: id,
         userId: user._id,
       };
       if (cart) {
-   
         dispatch(addToCart({ ...dataProduct, quantity_p: cart.quantity_p }));
         fetchAddToCart({ ...dataFetch, quantity_p: cart.quantity_p });
       } else {
-   
         dispatch(addToCart({ ...dataProduct, quantity_p: quantityProduct }));
         fetchAddToCart({ ...dataFetch, quantity_p: quantityProduct });
       }
-      messageApi.success("Đã thêm vào giỏ hàng!")
-    }else{
-      messageApi.warning("Vui lòng đăng nhập!")
+      messageApi.success("Đã thêm vào giỏ hàng!");
+    } else {
+      messageApi.warning("Vui lòng đăng nhập!");
     }
+  };
+  const [isContact, setIsContact] = useState(false);
+  const [dataContacts, setDataContact] = useState([]);
+  const handleContact = () => {
+    const getContacts = async () => {
+      const res = await axios.post("http://localhost:5000/api/contacts", {
+        sender: user._id,
+        receiver: dataProduct.shop.user._id,
+      });
+      console.log(res.data.data);
+      setDataContact(res.data.data);
+    };
+    getContacts();
+    setIsContact((pre) => !pre);
   };
   return (
     <>
-    {contextHolder}
+      {contextHolder}
       <div className="detail">
         <div className="container">
           {Object.keys(dataProduct).length === 0 ? (
-            <span style={{fontSize: "1.7rem"}}>Đang load sản phẩm...</span>
-          ) : (
+            <span style={{ fontSize: "1.7rem" }}>Đang load sản phẩm...</span>
+          ) : dataProduct.shop.user.deletedAt ? <h3>Sản phẩm này đã bị tạm ngưng hoạt động</h3> : (
             <div className="detail__container">
               <div className="detail__container-img">
-                <Image src={dataProduct.image.url[0]} alt="" className="img"/>
+                <Image src={dataProduct.image.url[0]} alt="" className="img" />
               </div>
               <div className="detail__container-info">
                 <h3 className="detail__info-shop">{dataProduct.shop.name}</h3>
                 <h2 className="detail__info-name">{dataProduct.name}</h2>
-                {/* <span className="detail__info-view">29 lượt xem</span> */}
-                {/* <div className="detail__info-size">
-                  <p className="info__size-heading">Chọn kích cỡ: </p>
-                  <div className="info__size-list">
-                    <div className="info__size-item">
-                      <span>S</span>
-                    </div>
-                    <div className="info__size-item">
-                      <span>M</span>
-                    </div>
-                    <div className="info__size-item">
-                      <span>L</span>
-                    </div>
-                    <div className="info__size-item">
-                      <span>XL</span>
-                    </div>
-                  </div>
-                </div> */}
+
                 <Tabs
                   defaultActiveKey="1"
-                  items={setTab(dataProduct)}
+                  items={setTab(dataProduct, dataFeedback)}
                   onChange={onChange}
                 />
               </div>
@@ -240,7 +293,10 @@ const DetailProduct = () => {
                     </div>
                   </div>
                   <div className="card__order-support">
-                    <div className="order__support-chat">
+                    <div
+                      className="order__support-chat"
+                      onClick={handleContact}
+                    >
                       <MessageOutlined />
                       <span>Nhắn với người bán</span>
                     </div>
@@ -249,7 +305,78 @@ const DetailProduct = () => {
               </div>
             </div>
           )}
+
+          {!isLoading && (
+            <div className="product__special">
+              <div className="product__special-title">
+                <h3>Sản phẩm tương tự</h3>
+                <span>Xem thêm</span>
+              </div>
+              <div className="product__special-slides">
+                <Slider {...settings}>
+                  {listProductByShop.filter(product => product._id !== id && !product.deletedAt).map((product, index) => {
+                    return <Product index={index} product={product} />;
+                  })}
+                </Slider>
+              </div>
+            </div>
+          )}
         </div>
+        {isContact && (
+          <div class="contact__box">
+            <div class="contact__box-header">
+              <span class="contact__receiver">Anh Clothes</span>
+              <div class="contact__close" onClick={(e) => setIsContact(false)}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="contact__content">
+              {dataContacts.map((item) => {
+                if (item.sender === user._id) {
+                  return (
+                    <div
+                      style={{
+                        marginLeft: "auto",
+                        marginRight: "0",
+                        width: "max-content",
+                      }}
+                    >
+                      {item.message}
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div
+                      style={{
+                        marginLeft: "0",
+                        marginRight: "auto",
+                        width: "max-content",
+                      }}
+                    >
+                      {item.message}
+                    </div>
+                  );
+                }
+              })}
+            </div>
+            <div class="contact__send">
+              <button className="contact__send-btn">Gửi</button>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

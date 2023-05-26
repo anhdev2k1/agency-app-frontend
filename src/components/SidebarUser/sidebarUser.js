@@ -1,6 +1,6 @@
 import "./sidebarUser.scss";
 import avt from "../../assets/images/avt-user.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   EditOutlined,
   UserOutlined,
@@ -58,29 +58,29 @@ const SideBarUser = () => {
       "sub2",
       <FileTextOutlined />
     ),
-    getItem("Thông báo", "sub3", <BellOutlined />, [
-      getItem(
-        <Link to="/user/notifications/order">
-          <span>Cập nhật đơn hàng</span>
-        </Link>,
-        "4",
-        <FileDoneOutlined />
-      ),
-      getItem(
-        <Link to="/user/notifications/rating">
-          <span>Cập nhật đánh giá</span>
-        </Link>,
-        "5",
-        <MessageOutlined />
-      ),
-      getItem(
-        <Link to="/user/notifications/system">
-          <span>Cập nhật hệ thống</span>
-        </Link>,
-        "6",
-        <SettingOutlined />
-      ),
-    ]),
+    // getItem("Thông báo", "sub3", <BellOutlined />, [
+    //   getItem(
+    //     <Link to="/user/notifications/order">
+    //       <span>Cập nhật đơn hàng</span>
+    //     </Link>,
+    //     "4",
+    //     <FileDoneOutlined />
+    //   ),
+    //   getItem(
+    //     <Link to="/user/notifications/rating">
+    //       <span>Cập nhật đánh giá</span>
+    //     </Link>,
+    //     "5",
+    //     <MessageOutlined />
+    //   ),
+    //   getItem(
+    //     <Link to="/user/notifications/system">
+    //       <span>Cập nhật hệ thống</span>
+    //     </Link>,
+    //     "6",
+    //     <SettingOutlined />
+    //   ),
+    // ]),
   ];
   const user = useSelector((state) => state.user.user);
   const [currentUser, setCurrentUser] = useState({});
@@ -112,7 +112,7 @@ const SideBarUser = () => {
             style={{
               width: 256,
             }}
-            defaultSelectedKeys={["1"]}
+            defaultSelectedKeys={"1"}
             defaultOpenKeys={["sub1"]}
             mode="inline"
             items={items}

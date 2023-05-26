@@ -23,15 +23,20 @@ const Navbar = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [searchData, setSearchData] = useState("");
   const [messageApi, contextHolder] = message.useMessage();
+  console.log(user.partnerAt !== null);
   const dispatch = useDispatch();
   useEffect(() => {
     setCurrentUser(user);
   }, [user]);
 
   const handleNavigateShop = () => {
-    if (user.role === 1) {
+    if (user.partnerAt && user.role === 1) {
+      navigate("/signin/partner");
+    }
+    if (user.role === 1 && !user.partnerAt) {
       navigate("/shop/create");
-    } else {
+    }
+    if(user.role === 2){
       const getShop = async () => {
         const res = await axios({
           method: "GET",
@@ -55,13 +60,29 @@ const Navbar = () => {
     }
   };
   const handleLogout = (e) => {
-    e.preventDefault()
-    localStorage.removeItem("token")
-    messageApi.loading("Đang đăng xuất...")
+    e.preventDefault();
+    localStorage.removeItem("token");
+    messageApi.loading("Đang đăng xuất...");
     setTimeout(() => {
-      navigate("/login")
-    },1000)
-  }
+      navigate("/login");
+    }, 1000);
+  };
+  const handleRedirect = (e) => {
+    const { id } = e.target.dataset;
+    if (id === "purchase") {
+      navigate("/user/purchase", {
+        state: {
+          selected: "sub2",
+        },
+      });
+    } else if (id === "profile") {
+      navigate("/user/account/profile", {
+        state: {
+          selected: "1",
+        },
+      });
+    }
+  };
   return (
     <nav className="navbar">
       {contextHolder}
@@ -124,19 +145,28 @@ const Navbar = () => {
                 <span>{`Hi, ${currentUser.name}!`}</span>
               </div>
               <ul className="navbar__user-dropdown">
-                <Link
-                  to="/user/account/profile"
+                <div
+                  data-id="profile"
                   className="user__dropdown-item"
+                  onClick={handleRedirect}
                 >
                   <ProfileOutlined style={{ marginRight: "5px" }} />
-                  <li>Hồ sơ</li>
-                </Link>
+                  <li data-id="profile">Hồ sơ</li>
+                </div>
 
-                <Link to="/user/purchase" className="user__dropdown-item">
+                <div
+                  className="user__dropdown-item"
+                  onClick={handleRedirect}
+                  data-id="purchase"
+                >
                   <ContainerOutlined style={{ marginRight: "5px" }} />
-                  <li>Đơn hàng</li>
-                </Link>
-                <Link to="" className="user__dropdown-item" onClick={handleLogout}>
+                  <li data-id="purchase">Đơn hàng</li>
+                </div>
+                <Link
+                  to=""
+                  className="user__dropdown-item"
+                  onClick={handleLogout}
+                >
                   <LogoutOutlined style={{ marginRight: "5px" }} />
                   <li>Đăng xuất</li>
                 </Link>

@@ -61,8 +61,8 @@ const Explore = () => {
                 {categories.map((cate,index) => {
                   return (
                     <Link to={`/category/search?q=${cate.slug}`} className="category-slides-item" key={index}>
-                    <img src={cate.url?.url[0]} alt="" />
-                    <p className="category__slide-name">{cate.name}</p>
+                    <img src={cate.url?.url[0]} alt="" style={{borderRadius:"50%"}}/>
+                    <p className="category__slide-name" style={{color: "#333"}}>{cate.name}</p>
                   </Link>
                   )
                 })}

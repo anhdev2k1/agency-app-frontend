@@ -29,10 +29,18 @@ import Categories from '../pages/Admin/Categories';
 import EditCategory from '../pages/Admin/EditCategory';
 import AdminStats from '../pages/Admin/AdminStats';
 import PageShop from '../pages/Seller/pageShop';
+import ResultPartner from '../pages/ResultPartner/resultPartner';
+import BrowsePartner from '../pages/Admin/browsePartner';
+import VerifyCode from '../pages/VerifyCode/verifyCode';
 const publicRoutes = [
   {
     path: '/',
     component: Home,
+    layout: null,
+  },
+  {
+    path: '/signup/verifyCode',
+    component: VerifyCode,
     layout: null,
   },
   {
@@ -57,7 +65,7 @@ const publicRoutes = [
     component: Transaction,
   },
   {
-    path: '/product/:id',
+    path: '/product/:id/shop/:idShop',
     component: DetailProduct,
   },
   {
@@ -111,6 +119,11 @@ const publicRoutes = [
   },
 
   /*-------SELLER ROUTE-------- */
+  {
+    path: '/signin/partner',
+    component: ResultPartner,
+    layout: null
+  },
   {
     path: '/shop/:id',
     component: ProfileShop,
@@ -198,6 +211,11 @@ const publicRoutes = [
   {
     path: '/admin/stats',
     component: AdminStats,
+    layout: 'admin',
+  },
+  {
+    path: '/admin/partner',
+    component: BrowsePartner,
     layout: 'admin',
   },
 ];

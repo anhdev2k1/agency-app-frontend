@@ -32,17 +32,19 @@ const CreateShop = () => {
       user: user._id,
       category,
       slug: convertToSlug(name),
+      partnerAt: Date.now()
     };
     const createShop = async () => {
       const res = await axios({
         method: "POST",
-        url: "http://localhost:5000/api/shop",
+        url: `http://localhost:5000/api/shop`,
         data: dataFetching,
         headers: { "Content-Type": "application/json" },
       });
       if (res.data.status === "success") {
-        localStorage.setItem("page",JSON.stringify(res.data.data._id))
-        navigate(`/shop/${res.data.data._id}`);
+        // localStorage.setItem("page",JSON.stringify(res.data.data._id))
+        // navigate(`/shop/${res.data.data._id}`);
+        navigate(`/signin/partner`)
       } else {
         alert("Tạo cửa hàng lỗi");
       }

@@ -17,15 +17,12 @@ const AllAccount = () => {
     });
     setUsers(res.data.data);
   };
-  const handleDelete = (data) => {
+  const handleDelete = (UserId) => {
     const deleteUser = async () => {
-      const res = await axios({
-        method: "DELETE",
-        url: `http://localhost:5000/api/auth/user/${data}`,
-        headers: { "Content-Type": "application/json" },
-      });
+      setReload(false)
+      await axios.delete(`http://localhost:5000/api/auth/user/${UserId}`)
     }
-    // deleteUser()
+    deleteUser()
     setReload(true)
   }
   const columns = [
@@ -89,21 +86,21 @@ const AllAccount = () => {
         label: `Người dùng`,
         key: 1,
         children: (
-          <Table columns={columns} dataSource={users.filter(role => role.role === 1 || role.role === 2 || role.role === 3)} />
+          <Table columns={columns} dataSource={users.filter(user => !user.deletedAt)} />
         ),
       },
       {
         label: `Đối tác`,
         key: 2,
         children: (
-          <Table columns={columns} dataSource={users.filter(role => role.role === 2)} />
+          <Table columns={columns} dataSource={users.filter(user => user.role === 2 && !user.deletedAt)} />
         ),
       },
       {
         label: `Quản trị viên`,
         key: 3,
         children: (
-          <Table columns={columns} dataSource={users.filter(role => role.role === 3)} />
+          <Table columns={columns} dataSource={users.filter(user => user.role === 3 && !user.deletedAt)} />
         ),
       },
   ]

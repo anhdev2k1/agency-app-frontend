@@ -31,6 +31,7 @@ const Home = () => {
           </div>
           <div className="header">
             <div className="circle__header"></div>
+            <div className="circle__header-two"></div>
             <div className="header__title">
               <h2>Trở thành một nhà bán hàng xuất sắc !!</h2>
               <p className="header__title-desc">

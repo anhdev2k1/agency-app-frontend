@@ -46,15 +46,18 @@ const AccountUser = () => {
     <>
       <div className="user__container">
         <div className="user__container-title">
-          <h3 className="user__title-heading" style={{ fontSize: "2rem" }}>
+          <h3 className="user__title-heading" style={{ fontSize: "2rem", padding: "10px 0"}}>
             Hồ sơ của tôi
           </h3>
           <p className="user__title-desc" style={{ fontSize: "1.6rem" }}>
             Quản lý thông tin hồ sơ để bảo mật tài khoản
           </p>
         </div>
-        
-        <div className="user__content">
+
+        <div
+          className="user__content"
+          style={{ width: "600px", minHeight: "300px", margin: "50px auto" }}
+        >
           <Form
             labelCol={{
               span: 4,
@@ -62,21 +65,18 @@ const AccountUser = () => {
             wrapperCol={{
               span: 14,
             }}
-            layout="horizontal"
+            layout="vertical"
             onFinish={handleCreateFinish}
             form={newForm}
           >
-            <Form.Item label="Email đăng nhập">
-              <span>info*****@gmail.com</span>
-            </Form.Item>
             <Form.Item label="Tên" name="name">
-              <Input name="name" value={user.name} />
+              <Input name="name" value={user.name}/>
             </Form.Item>
             <Form.Item label="Email">
-              <span>info*****@gmail.com</span>
+              <Input name="email" value={user.email} disabled/>
             </Form.Item>
             <Form.Item label="Số điện thoại">
-              <span>038*****25</span>
+              <Input name="phone" value={!user.phone ? "Chưa cập nhật" : user?.phone} disabled/>
             </Form.Item>
             <Form.Item
               label="Chọn ảnh"
@@ -102,7 +102,7 @@ const AccountUser = () => {
               </Upload>
             </Form.Item>
             <Form.Item>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit" style={{width: "120px", height: "40px", display: "block", margin: "0 auto"}}>
                 Lưu
               </Button>
             </Form.Item>

@@ -55,8 +55,21 @@
             bottom: -40px;
             right: 450px;
             background: linear-gradient(90deg, hsla(176, 61%, 87%, 1) 0%, hsla(150, 54%, 86%, 1) 50%, hsla(301, 68%, 84%, 1) 100%);
-            filter: blur(15px);
+            filter: blur(10px);
             z-index: 1;
+            animation: fadeIn ease-in-out 5s infinite alternate;
+        }
+        .circle__header-two{
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            bottom: -170px;
+            left: 0px;
+            background: linear-gradient(90deg, hsla(176, 61%, 87%, 1) 0%, hsla(150, 54%, 86%, 1) 50%, hsla(301, 68%, 84%, 1) 100%);
+            filter: blur(8px);
+            z-index: 1;
+            animation: fadeIn ease-in-out 5s infinite alternate;
         }
         .header__title{
             width: 450px;
@@ -188,5 +201,12 @@
             }
         }
         
+    }
+}
+@keyframes fadeIn {
+    from{
+        transform: translateY(0);
+    }to{
+        transform: translateY(-100px);
     }
 }

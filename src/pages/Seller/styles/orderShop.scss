@@ -45,7 +45,7 @@
             width: 15%;
         }
         .order__item-paidAt{
-            width: 10%;
+            width: 15%;
         }
         .order__item-shipping{
             width: 10%;
@@ -95,7 +95,10 @@
                     }
                     .item__product-status span, .item__product-paidAt span{
                         padding: 8px 10px;
-                        border-radius: 8px;
+                        border-radius: 8px; 
+                        width: 130px;
+                        display: block;
+                        text-align: center;
                     }
                     
                 }

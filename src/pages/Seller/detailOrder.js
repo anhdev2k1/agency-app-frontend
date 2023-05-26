@@ -11,6 +11,8 @@ import { useEffect, useState } from "react";
 import { Steps, Button, Modal } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { checkStatus } from "../../redux/features/statusOrderSlice";
+import convertDateTime from "../../ultis/convertDateTime";
+import { Link, useNavigate } from "react-router-dom";
 const DetailOrder = () => {
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -54,6 +56,14 @@ const DetailOrder = () => {
     };
     updateStatusOrder();
   };
+  const navigate = useNavigate()
+  // const handleNavigate = () => {
+  //   navigate('/shop/order/',{
+  //     state:{
+  //       path:"3"
+  //     }
+  //   })
+  // }
   return (
     <div className="container">
       {isLoading ? (
@@ -66,6 +76,9 @@ const DetailOrder = () => {
               <div className="detail__order" key={index}>
                 <div className="detail__order-info">
                   <div className="detail__order_btns">
+                    <Link to="/shop/order">
+                      <button>Quay lại</button>
+                    </Link>
                     <Button type="primary" onClick={showModal}>
                       Cập nhật đơn hàng
                     </Button>
@@ -74,6 +87,7 @@ const DetailOrder = () => {
                       open={isModalOpen}
                       onOk={handleOk}
                       onCancel={handleCancel}
+                      footer={null}
                     >
                       <Form layout="vertical" onFinish={onFinish}>
                         <span>{`Người mua : ${order.transaction.user.name}`}</span>
@@ -92,7 +106,7 @@ const DetailOrder = () => {
                             <Select.Option value={4}>Đã hủy</Select.Option>
                           </Select>
                         </Form.Item>
-                        <Button type="primary" htmlType="submit">
+                        <Button type="primary" htmlType="submit" style={{ display: "block",marginLeft:"auto", marginRight: "0"}}>
                           Lưu
                         </Button>
                       </Form>
@@ -112,9 +126,8 @@ const DetailOrder = () => {
                           ? "Giao thành công"
                           : "Đã hủy"}
                       </h3>
-                      <span>{`Đơn hàng được đặt vào ${new Date(
-                        order.createdAt
-                      ).toDateString()}`}</span>
+                      <span>{`Đơn hàng được đặt vào ${convertDateTime(order.createdAt)}`}</span>
+                      
                     </div>
                   </div>
 

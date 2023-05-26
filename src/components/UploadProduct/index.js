@@ -110,14 +110,14 @@ const ShopProductForm = (props) => {
         onFinish={handleSubmitProductForm}
         form={newForm}
       >
-        {props.product && Object.keys(props.product).length > 0 && (
+        {/* {props.product && Object.keys(props.product).length > 0 && (
           <Form.Item label='Đường dẫn'>
             <Link
-              to={`/product/${props.product._id}`}
+              to={`/product/${props.product._id}/shop/${props.shop._id}`}
               target='_blank'
             >{`localhost:3000/product/${props.product._id}`}</Link>
           </Form.Item>
-        )}
+        )} */}
         <Form.Item label='Tên sản phẩm' name='name'>
           <Input name='name' />
         </Form.Item>

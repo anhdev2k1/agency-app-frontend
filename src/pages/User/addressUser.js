@@ -166,6 +166,7 @@ const AddressUser = () => {
                 open={isModalOpen}
                 onOk={handleOk}
                 onCancel={handleCancel}
+                footer={false}
               >
                 <Form
                   labelCol={{ span: 8 }}
@@ -175,14 +176,14 @@ const AddressUser = () => {
                 >
                   <div className="form__input-flex">
                     <Form.Item label="Họ và tên" name="name">
-                      <Input name="name" />
+                      <Input name="name" value={user.name}/>
                     </Form.Item>
                     <Form.Item label="Số điện thoại" name="phone">
                       <Input name="phone" />
                     </Form.Item>
                   </div>
                   <Form.Item
-                    label="Chọn Đất Nước"
+                    label="Chọn Tỉnh/Thành"
                     name="country"
                     rules={[
                       {
@@ -191,7 +192,7 @@ const AddressUser = () => {
                     ]}
                   >
                     <Select
-                      placeholder="Select country..."
+                      placeholder="Chọn Tỉnh/Thành..."
                       onChange={handleChange}
                     >
                       {Object.entries(country).map((state, index) => {
@@ -209,7 +210,7 @@ const AddressUser = () => {
                   </Form.Item>
 
                   <Form.Item
-                    label="Select States"
+                    label="Chọn Quận/Huyện"
                     name="state"
                     rules={[
                       {
@@ -217,7 +218,7 @@ const AddressUser = () => {
                       },
                     ]}
                   >
-                    <Select placeholder="Select States...">
+                    <Select placeholder="Chọn Quận/Huyện...">
                       {stateData.map((state, index) => {
                         return (
                           <Select.Option value={state.name} key={index}>
@@ -230,7 +231,7 @@ const AddressUser = () => {
                   <Form.Item label="Địa chỉ cụ thể" name="address">
                     <TextArea name="address" rows={4} />
                   </Form.Item>
-                  <Button type="primary" htmlType="submit">
+                  <Button type="primary" htmlType="submit" style={{display: "block", marginLeft: "auto", marginRight: "0", width:"120px", height: "40px"}}>
                     Lưu
                   </Button>
                 </Form>

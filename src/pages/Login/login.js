@@ -13,7 +13,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
-  const createUser = async (data) => {
+  const loginUser = async (data) => {
     try {
       const res = await axios({
         method: "POST",
@@ -40,16 +40,12 @@ const Login = () => {
     }
   };
   const onFinish = (values) => {
-    createUser(values);
+    loginUser(values);
   };
   return (
     <>
       <div className="form__container">
-        {/* {Object.keys(currentUser).length !== 0 ? (
-          <Navigate to="/explore" replace="true" />
-        ) : (
-          <p>{error}</p>
-        )} */}
+       
         {contextHolder}
         <div className="circle__one circle"></div>
         <div className="circle__two circle"></div>

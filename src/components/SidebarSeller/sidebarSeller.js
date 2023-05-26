@@ -1,5 +1,5 @@
 import avt from '../../assets/images/avt-user.png';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   EditOutlined,
   UserOutlined,
@@ -24,6 +24,8 @@ const SidebarSeller = () => {
     };
   }
   const pageID = JSON.parse(localStorage.getItem('page'));
+  const {state} = useLocation()
+  const {path} = state || "1"
   const items = [
     getItem('Quản lý shop', 'sub1', <UserOutlined />, [
       getItem(
@@ -93,7 +95,7 @@ const SidebarSeller = () => {
             style={{
               width: 256,
             }}
-            defaultSelectedKeys={['1']}
+            defaultSelectedKeys={"1"}
             defaultOpenKeys={['sub1']}
             mode='inline'
             items={items}
