@@ -22,11 +22,10 @@ function App() {
         data: { token },
         headers: { "Content-Type": "application/json" },
       });
-
       dispatch(checkUser(res.data.data));
     };
     getCurrentUser();
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     const getAllCart = async () => {
