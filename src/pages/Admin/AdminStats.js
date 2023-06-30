@@ -83,7 +83,7 @@ function AdminStats() {
 
       const res = await axios({
         method: 'GET',
-        url: `http://localhost:5000/api/admin/stats?${query}`,
+        url: `https://agency-app-backend.vercel.app/api/admin/stats?${query}`,
       });
       if (res.status === 200) {
         setStats(res.data.data);

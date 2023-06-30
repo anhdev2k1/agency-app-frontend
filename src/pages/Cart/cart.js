@@ -25,7 +25,7 @@ const Cart = () => {
     const saveCart = async () => {
       await axios({
         method: "PUT",
-        url: "http://localhost:5000/api/cart",
+        url: "https://agency-app-backend.vercel.app/api/cart",
         data: dataUpdate,
         headers: { "Content-Type": "application/json" },
       });
@@ -38,7 +38,7 @@ const Cart = () => {
     const removeCart = async () => {
       await axios({
         method: "DELETE",
-        url: `http://localhost:5000/api/cart/${pid}`,
+        url: `https://agency-app-backend.vercel.app/api/cart/${pid}`,
       });
     };
     removeCart();

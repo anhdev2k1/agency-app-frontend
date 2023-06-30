@@ -13,7 +13,7 @@ const OrderShop = () => {
     setIsLoading(true);
     const res = await axios({
       method: "GET",
-      url: `http://localhost:5000/api/shop/order/${pageID}`,
+      url: `https://agency-app-backend.vercel.app/api/shop/order/${pageID}`,
     });
     console.log(res.data.data);
     setOrders(res.data.data);

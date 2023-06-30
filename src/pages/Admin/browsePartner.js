@@ -6,7 +6,7 @@ const BrowsePartner = () => {
   const [partners, setPartners] = useState([]);
   const [isReload, setIsReload] = useState(false)
   const getPartner = async () => {
-    const res = await axios.get("http://localhost:5000/api/admin/partner");
+    const res = await axios.get("https://agency-app-backend.vercel.app/api/admin/partner");
     console.log(res.data.data);
     setPartners(res.data.data);
   };
@@ -16,7 +16,7 @@ const BrowsePartner = () => {
   const handleBrowsePartner = (id) => {
     setIsReload(false)
     const isAcceptPartner = async () => {
-        await axios.patch(`http://localhost:5000/api/admin/partner/${id}`,{
+        await axios.patch(`https://agency-app-backend.vercel.app/api/admin/partner/${id}`,{
             role: 2
         })
     }

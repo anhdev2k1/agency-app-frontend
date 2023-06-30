@@ -50,7 +50,7 @@ const Transaction = () => {
   const createTransaction = async (data) => {
     const res = await axios({
       method: "POST",
-      url: "http://localhost:5000/api/transaction",
+      url: "https://agency-app-backend.vercel.app/api/transaction",
       data: data,
       headers: { "Content-Type": "application/json" },
     });

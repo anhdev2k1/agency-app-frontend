@@ -35,7 +35,7 @@ function CategoryForm(props) {
     const createCategory = async () => {
       const res = await axios({
         method: 'POST',
-        url: 'http://localhost:5000/api/category',
+        url: 'https://agency-app-backend.vercel.app/api/category',
         data: category,
         headers: { 'Content-Type': 'application/json' },
       });
@@ -52,7 +52,7 @@ function CategoryForm(props) {
     const updateCategory = async () => {
       const res = await axios({
         method: 'PATCH',
-        url: `http://localhost:5000/api/category/${props.category._id}`,
+        url: `https://agency-app-backend.vercel.app/api/category/${props.category._id}`,
         data: category,
         headers: { 'Content-Type': 'application/json' },
       });

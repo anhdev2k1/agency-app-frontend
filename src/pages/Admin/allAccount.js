@@ -12,7 +12,7 @@ const AllAccount = () => {
   const getProducts = async () => {
     const res = await axios({
       method: "get",
-      url: `http://localhost:5000/api/auth/users`,
+      url: `https://agency-app-backend.vercel.app/api/auth/users`,
       headers: { "Content-Type": "application/json" },
     });
     setUsers(res.data.data);
@@ -20,7 +20,7 @@ const AllAccount = () => {
   const handleDelete = (UserId) => {
     const deleteUser = async () => {
       setReload(false)
-      await axios.delete(`http://localhost:5000/api/auth/user/${UserId}`)
+      await axios.delete(`https://agency-app-backend.vercel.app/api/auth/user/${UserId}`)
     }
     deleteUser()
     setReload(true)

@@ -16,7 +16,7 @@ const SearchPage = () => {
     setIsLoading(true);
     const res = await axios({
       method: "GET",
-      url: `http://localhost:5000/api/${pathName.substring(pathName.indexOf("/") + 1,pathName.indexOf("/",1))}/search?q=${categoryParam}`,
+      url: `https://agency-app-backend.vercel.app/api/${pathName.substring(pathName.indexOf("/") + 1,pathName.indexOf("/",1))}/search?q=${categoryParam}`,
     });
     setDataSearch(res.data.data);
     setIsLoading(false);

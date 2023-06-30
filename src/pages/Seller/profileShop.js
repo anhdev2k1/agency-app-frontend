@@ -19,7 +19,7 @@ const ProfileShop = () => {
   const getPage = async () => {
     const res = await axios({
       method: "GET",
-      url: `http://localhost:5000/api/shop/${pageID}`,
+      url: `https://agency-app-backend.vercel.app/api/shop/${pageID}`,
     });
   };
   const editorConfig = () => {
@@ -64,7 +64,7 @@ const ProfileShop = () => {
     const createPage = async () => {
       const res = await axios({
         method: "POST",
-        url: `http://localhost:5000/api/shop/${pageID}`,
+        url: `https://agency-app-backend.vercel.app/api/shop/${pageID}`,
         data: data,
         headers: { "Content-Type": "application/json" },
       });

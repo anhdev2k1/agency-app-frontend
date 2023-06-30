@@ -24,7 +24,7 @@ const Explore = () => {
     setIsLoading(true);
     const res = await axios({
       method: "GET",
-      url: "http://localhost:5000/api/products",
+      url: "https://agency-app-backend.vercel.app/api/products",
     });
     setProductSpecial(res.data.data);
     setIsLoading(false);
@@ -36,7 +36,7 @@ const Explore = () => {
   const getCategories = async () => {
     const res = await axios({
       method: "GET",
-      url: "http://localhost:5000/api/category",
+      url: "https://agency-app-backend.vercel.app/api/category",
     });
     setCategories(res.data.data);
   }

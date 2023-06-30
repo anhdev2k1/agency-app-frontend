@@ -14,7 +14,7 @@ const Product = (props) => {
   const fetchAddToCart = async (data) => {
     await axios({
       method: "POST",
-      url: "http://localhost:5000/api/cart",
+      url: "https://agency-app-backend.vercel.app/api/cart",
       data: data,
       headers: { "Content-Type": "application/json" },
     });

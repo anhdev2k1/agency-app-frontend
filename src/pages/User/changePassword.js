@@ -13,7 +13,7 @@ const ChangePasswordUser = () => {
   const updatePassword = async (data) => {
     const res = await axios({
       method: "PUT",
-      url: "http://localhost:5000/api/auth/user",
+      url: "https://agency-app-backend.vercel.app/api/auth/user",
       data: data,
       headers: { "Content-Type": "application/json" },
     });
@@ -31,7 +31,7 @@ const ChangePasswordUser = () => {
       try {
         const res = await axios({
           method: "POST",
-          url: "http://localhost:5000/api/auth/user/password",
+          url: "https://agency-app-backend.vercel.app/api/auth/user/password",
           data: formData,
           headers: { "Content-Type": "application/json" },
         });

@@ -21,7 +21,7 @@ const PurchaseUser = () => {
       const res = await axios({
         method: "POST",
         data: { token },
-        url: "http://localhost:5000/api/transaction/user",
+        url: "https://agency-app-backend.vercel.app/api/transaction/user",
         headers: { "Content-Type": "application/json" },
       });
       setTransaction(res.data.data);

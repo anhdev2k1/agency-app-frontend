@@ -24,7 +24,7 @@ const DetailOrder = () => {
     setIsLoading(true);
     const res = await axios({
       method: "GET",
-      url: `http://localhost:5000/api/order/${orderID}`,
+      url: `https://agency-app-backend.vercel.app/api/order/${orderID}`,
     });
     setOrders(res.data.data);
     setIsLoading(false);
@@ -46,7 +46,7 @@ const DetailOrder = () => {
     const updateStatusOrder = async () => {
       const res = await axios({
         method: "PUT",
-        url: `http://localhost:5000/api/order/${orderID}`,
+        url: `https://agency-app-backend.vercel.app/api/order/${orderID}`,
         data: values,
         headers: { "Content-Type": "application/json" },
       });
@@ -90,7 +90,7 @@ const DetailOrder = () => {
                       footer={null}
                     >
                       <Form layout="vertical" onFinish={onFinish}>
-                        <span>{`Người mua : ${order.transaction.user.name}`}</span>
+                        <span>{`Người mua : ${order.transaction.user?.name}`}</span>
                         <Form.Item label="Trạng thái" name="status">
                           <Select defaultValue={order.status}>
                             <Select.Option value={0}>

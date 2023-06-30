@@ -17,7 +17,7 @@ const Login = () => {
     try {
       const res = await axios({
         method: "POST",
-        url: "http://localhost:5000/api/auth/user/login",
+        url: "https://agency-app-backend.vercel.app/api/auth/user/login",
         data: data,
         headers: { "Content-Type": "application/json" },
       });

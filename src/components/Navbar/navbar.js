@@ -40,7 +40,7 @@ const Navbar = () => {
       const getShop = async () => {
         const res = await axios({
           method: "GET",
-          url: `http://localhost:5000/api/shop/${user._id}/content`,
+          url: `https://agency-app-backend.vercel.app/api/shop/${user._id}/content`,
           headers: { "Content-Type": "application/json" },
         });
         localStorage.setItem("page", JSON.stringify(res.data.data._id));

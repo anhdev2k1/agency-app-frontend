@@ -39,7 +39,7 @@ const OrderProduct = ({ item, index, setTransaction }) => {
     const updateOrder = async () => {
       await axios({
         method: "PUT",
-        url: `http://localhost:5000/api/transaction/${id}`,
+        url: `https://agency-app-backend.vercel.app/api/transaction/${id}`,
         data,
         headers: { "Content-Type": "application/json" },
       });
@@ -68,7 +68,7 @@ const OrderProduct = ({ item, index, setTransaction }) => {
   const user = useSelector((state) => state.user.user);
   const handleAddFeedback = async () => {
     console.log(item.product._id);
-    const res = await axios.post("http://localhost:5000/api/feedback", {
+    const res = await axios.post("https://agency-app-backend.vercel.app/api/feedback", {
       rating: countRate,
       content: valueRate,
       user: user._id,

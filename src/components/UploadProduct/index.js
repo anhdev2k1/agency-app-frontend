@@ -33,7 +33,7 @@ const ShopProductForm = (props) => {
   const getCategories = async () => {
     const res = await axios({
       method: 'GET',
-      url: 'http://localhost:5000/api/category',
+      url: 'https://agency-app-backend.vercel.app/api/category',
     });
     setCategory(res.data.data);
   };
@@ -57,7 +57,7 @@ const ShopProductForm = (props) => {
     const createProduct = async () => {
       const res = await axios({
         method: 'POST',
-        url: 'http://localhost:5000/api/products',
+        url: 'https://agency-app-backend.vercel.app/api/products',
         data: product,
         headers: { 'Content-Type': 'application/json' },
       });
@@ -74,7 +74,7 @@ const ShopProductForm = (props) => {
     const editProduct = async () => {
       const res = await axios({
         method: 'PATCH',
-        url: `http://localhost:5000/api/product/${props.product._id}/edit`,
+        url: `https://agency-app-backend.vercel.app/api/product/${props.product._id}/edit`,
         data: product,
         headers: { 'Content-Type': 'application/json' },
       });

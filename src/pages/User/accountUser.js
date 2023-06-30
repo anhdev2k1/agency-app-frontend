@@ -24,7 +24,7 @@ const AccountUser = () => {
     const updateInfoUser = async () => {
       const res = await axios({
         method: "PUT",
-        url: "http://localhost:5000/api/auth/user",
+        url: "https://agency-app-backend.vercel.app/api/auth/user",
         data: resultUpdate,
         headers: { "Content-Type": "application/json" },
       });

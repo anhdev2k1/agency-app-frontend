@@ -22,7 +22,7 @@ const ManageProduct = () => {
       if (idShop) {
         const res = await axios({
           method: 'get',
-          url: `http://localhost:5000/api/products/${idShop}`,
+          url: `https://agency-app-backend.vercel.app/api/products/${idShop}`,
           headers: { 'Content-Type': 'application/json' },
         });
         setProducts(res.data.data);
@@ -89,7 +89,7 @@ const ManageProduct = () => {
   const handleDeleteProduct = async (id) => {
     const res = await axios({
       method: 'DELETE',
-      url: `http://localhost:5000/api/product/${id}`,
+      url: `https://agency-app-backend.vercel.app/api/product/${id}`,
     });
 
     if (res.status === 200) {

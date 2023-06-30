@@ -11,7 +11,7 @@ function EditProduct() {
 
   useEffect(() => {
     const getProduct = async () => {
-      const res = await axios.get(`http://localhost:5000/api/product/${id}`);
+      const res = await axios.get(`https://agency-app-backend.vercel.app/api/product/${id}`);
 
       if (res.status === 200 && res.data.data) {
         setProduct(res.data.data);

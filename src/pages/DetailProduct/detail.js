@@ -108,7 +108,7 @@ const DetailProduct = () => {
       setIsLoading(true);
       const res = await axios({
         method: "GET",
-        url: `http://localhost:5000/api/product/${id}`,
+        url: `https://agency-app-backend.vercel.app/api/product/${id}`,
       });
       setDataProduct(res.data.data);
       setIsLoading(false);
@@ -120,7 +120,7 @@ const DetailProduct = () => {
     setIsLoading(true);
     const res = await axios({
       method: "GET",
-      url: `http://localhost:5000/api/feedback/${id}`,
+      url: `https://agency-app-backend.vercel.app/api/feedback/${id}`,
     });
     setDataFeedback(res.data.data);
     setIsLoading(false);
@@ -130,7 +130,7 @@ const DetailProduct = () => {
     const getProducts = async () => {
       const res = await axios({
         method: "GET",
-        url: `http://localhost:5000/api/products/${idShop}`,
+        url: `https://agency-app-backend.vercel.app/api/products/${idShop}`,
       });
       setListProductByShop(res.data.data);
       setIsLoading(false);
@@ -169,7 +169,7 @@ const DetailProduct = () => {
   const fetchAddToCart = async (data) => {
     const res = await axios({
       method: "POST",
-      url: "http://localhost:5000/api/cart",
+      url: "https://agency-app-backend.vercel.app/api/cart",
       data: data,
       headers: { "Content-Type": "application/json" },
     });
@@ -196,7 +196,7 @@ const DetailProduct = () => {
   const [dataContacts, setDataContact] = useState([]);
   const handleContact = () => {
     const getContacts = async () => {
-      const res = await axios.post("http://localhost:5000/api/contacts", {
+      const res = await axios.post("https://agency-app-backend.vercel.app/api/contacts", {
         sender: user._id,
         receiver: dataProduct.shop.user._id,
       });

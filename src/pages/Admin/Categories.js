@@ -19,7 +19,7 @@ function Categories() {
   useEffect(() => {
     setIsLoading(true);
     const getCategories = async () => {
-      const res = await axios.get('http://localhost:5000/api/category');
+      const res = await axios.get('https://agency-app-backend.vercel.app/api/category');
 
       if (res.status === 200) {
         setCategories(res.data.data);
@@ -75,7 +75,7 @@ function Categories() {
   const handleDeleteCategory = async (id) => {
     const res = await axios({
       method: 'DELETE',
-      url: `http://localhost:5000/api/category/${id}`,
+      url: `https://agency-app-backend.vercel.app/api/category/${id}`,
     });
 
     if (res.status === 200) {

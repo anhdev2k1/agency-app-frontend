@@ -19,7 +19,7 @@ const CreateShop = () => {
     const fetchCategory = async () => {
       const res = await axios({
         method: "GET",
-        url: "http://localhost:5000/api/category",
+        url: "https://agency-app-backend.vercel.app/api/category",
       });
       setCategory(res.data.data);
     };
@@ -37,7 +37,7 @@ const CreateShop = () => {
     const createShop = async () => {
       const res = await axios({
         method: "POST",
-        url: `http://localhost:5000/api/shop`,
+        url: `https://agency-app-backend.vercel.app/api/shop`,
         data: dataFetching,
         headers: { "Content-Type": "application/json" },
       });

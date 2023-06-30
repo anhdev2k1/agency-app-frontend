@@ -9,7 +9,7 @@ const PageShop = () => {
     const getLayoutShop = async () => {
       const res = await axios({
         method: "GET",
-        url: `http://localhost:5000/api/shop/${idShop}`,
+        url: `https://agency-app-backend.vercel.app/api/shop/${idShop}`,
       });
       setLayout(res.data.data.page[0]);
     };

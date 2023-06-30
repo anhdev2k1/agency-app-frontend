@@ -18,7 +18,7 @@ function App() {
     const getCurrentUser = async () => {
       const res = await axios({
         method: "POST",
-        url: "http://localhost:5000/api/auth/currentUser",
+        url: "https://agency-app-backend.vercel.app/api/auth/currentUser",
         data: { token },
         headers: { "Content-Type": "application/json" },
       });
@@ -32,7 +32,7 @@ function App() {
     const getAllCart = async () => {
       const res = await axios({
         method: "POST",
-        url: "http://localhost:5000/api/cartUser",
+        url: "https://agency-app-backend.vercel.app/api/cartUser",
         data: { token },
         headers: { "Content-Type": "application/json" },
       });

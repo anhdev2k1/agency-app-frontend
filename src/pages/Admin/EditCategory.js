@@ -10,7 +10,7 @@ const EditCategory = () => {
 
   useEffect(() => {
     const getCategory = async () => {
-      const res = await axios.get(`http://localhost:5000/api/category/${id}`);
+      const res = await axios.get(`https://agency-app-backend.vercel.app/api/category/${id}`);
 
       if (res.status === 200) {
         setCategory(res.data.data);

@@ -118,7 +118,7 @@ function Stats() {
       }).toString();
       const res = await axios({
         method: 'GET',
-        url: `http://localhost:5000/api/shop/${shopId}/order_stats?${query}`,
+        url: `https://agency-app-backend.vercel.app/api/shop/${shopId}/order_stats?${query}`,
       });
 
       setStats(res.data.data);

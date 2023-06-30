@@ -19,23 +19,22 @@ const Register = () => {
       messageApi.loading("Đợi 1 tý nhé!...")
       const res = await axios({
         method: "POST",
-        url: "http://localhost:5000/api/auth/user/register",
+        url: "https://agency-app-backend.vercel.app/api/auth/user/register",
         data: data,
         headers: { "Content-Type": "application/json" },
       });
-      // dispatch(checkUser(res.data.data));
-      // setCurrentUser(res.data.data);
-      // localStorage.setItem("token", JSON.stringify(res.data.data.token));
-      // messageApi.success("Đăng kí thành công! Đợi 1 tý nhé...")
-      // setTimeout(() => {
-      //   navigate("/explore")
-      // },1000)
-      console.log(data);
-      navigate("/signup/verifyCode",{
-        state:{
-          emailRegister:data.email
-        }
-      })
+      dispatch(checkUser(res.data.data));
+      setCurrentUser(res.data.data);
+      localStorage.setItem("token", JSON.stringify(res.data.data.token));
+      messageApi.success("Đăng kí thành công! Đợi 1 tý nhé...")
+      setTimeout(() => {
+        navigate("/explore")
+      },1000)
+      // navigate("/signup/verifyCode",{
+      //   state:{
+      //     emailRegister:data.email
+      //   }
+      // })
     } catch (error) {
       setError(error.response.data.error);
       messageApi.error(`${error.response.data.error}`)
