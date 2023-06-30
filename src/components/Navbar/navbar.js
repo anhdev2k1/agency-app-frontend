@@ -18,12 +18,12 @@ import { checkDataSearch } from "../../redux/features/searchSlice";
 
 const Navbar = () => {
   const user = useSelector((state) => state.user.user);
+  // console.log(user);
   const cart = useSelector((state) => state.cart.cart);
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState({});
   const [searchData, setSearchData] = useState("");
   const [messageApi, contextHolder] = message.useMessage();
-  console.log(user.partnerAt !== null);
   const dispatch = useDispatch();
   useEffect(() => {
     setCurrentUser(user);

@@ -23,7 +23,7 @@ const Register = () => {
         data: data,
         headers: { "Content-Type": "application/json" },
       });
-      dispatch(checkUser(res.data.data));
+      dispatch(checkUser(res.data.data._doc));
       setCurrentUser(res.data.data);
       localStorage.setItem("token", JSON.stringify(res.data.data.token));
       messageApi.success("Đăng kí thành công! Đợi 1 tý nhé...")

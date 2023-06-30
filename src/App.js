@@ -25,7 +25,7 @@ function App() {
       dispatch(checkUser(res.data.data));
     };
     getCurrentUser();
-  }, [user]);
+  }, []);
 
   useEffect(() => {
     const getAllCart = async () => {
