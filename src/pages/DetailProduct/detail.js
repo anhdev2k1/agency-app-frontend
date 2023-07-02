@@ -40,9 +40,7 @@ const DetailProduct = () => {
   );
   const onChange = (key) => {};
   const [quantityProduct, setQuantityProduct] = useState(1);
-
   const setTab = (data, feedbacks) => {
-    console.log(feedbacks);
     const items = [
       {
         key: "1",
@@ -60,9 +58,8 @@ const DetailProduct = () => {
               <div className="info__shop-wrapper">
                 <img
                   src={
-                    Object.keys(data.shop?.user).length > 0
-                      ? data.shop.user?.url?.url[0]
-                      : avt
+                    data.shop.user?.url?.url[0] ??
+                    avt
                   }
                   alt=""
                 />
@@ -213,7 +210,7 @@ const DetailProduct = () => {
         <div className="container">
           {Object.keys(dataProduct).length === 0 ? (
             <span style={{ fontSize: "1.7rem" }}>Đang load sản phẩm...</span>
-          ) : dataProduct.shop.user.deletedAt ? <h3>Sản phẩm này đã bị tạm ngưng hoạt động</h3> : (
+          ) : dataProduct.shop.user?.deletedAt ? <h3>Sản phẩm này đã bị tạm ngưng hoạt động</h3> : (
             <div className="detail__container">
               <div className="detail__container-img">
                 <Image src={dataProduct.image.url[0]} alt="" className="img" />

@@ -7,7 +7,6 @@ const BrowsePartner = () => {
   const [isReload, setIsReload] = useState(false)
   const getPartner = async () => {
     const res = await axios.get("https://agency-app-backend.vercel.app/api/admin/partner");
-    console.log(res.data.data);
     setPartners(res.data.data);
   };
   useEffect(() => {
@@ -23,7 +22,6 @@ const BrowsePartner = () => {
     isAcceptPartner()
     setIsReload(true)
   }
-  console.log(partners);
   const columns = [
     {
       title: "Tên cửa hàng",
@@ -109,8 +107,7 @@ const BrowsePartner = () => {
       children: (
         <Table
           columns={columns}
-          dataSource={partners.filter((item) => item.partnerAt && item.user.role === 1)}
-
+          dataSource={partners.filter((item) => item.partnerAt && item.user?.role === 1)}
         />
       ),
     },
